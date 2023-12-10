@@ -90,7 +90,7 @@ public class Collection implements IData {
         }
     }
 
-    public List<Doc> where(String query, int field) throws IOException {
+    public List<Doc> where(String query, int field) throws IOException, ArrayIndexOutOfBoundsException {
         String regex = String.format("(?<![a-zA-Z ])%s(?![a-zA-Z ])", query);
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
@@ -114,6 +114,10 @@ public class Collection implements IData {
 
                 if (matcher.find()) {
                     String[] dataFields = fileData.split(",");
+
+                    if (field >= dataFields.length) {
+                        return;
+                    }
 
                     if (dataFields[field].equals(query)) {
                         docs.add(new Doc(this, documentName));
