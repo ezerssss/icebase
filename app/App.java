@@ -2,12 +2,13 @@ package icebase.app;
 
 import java.util.Scanner;
 
-import icebase.icebase.Icebase;
+import icebase.icebase.User;
+import icebase.icebase.Auth;
+import icebase.icebase.Db;
 
 public class App {
 
     public static void main(String[] args) {
-        Icebase ib = new Icebase();
         Scanner sc = new Scanner(System.in);
 
         // Splash Screen
@@ -17,5 +18,32 @@ public class App {
                 "Log-in", " ", "Sign-up");
         System.out.print("Choice: ");
         sc.nextLine();
+
+        // Pwede nyo i play around ang this shit
+        try {
+            Auth auth = Auth.getAuth();
+
+            // setup sa account
+            // might error if i run mo twice, so just delete lang sa users nga data folder
+            User user = auth.signUp("hi", "hello");
+            user.setStoreId("shitStoreID"); // generated random uid ni siya pero yeah
+            user.setMoney(9999);
+
+            // Actual logging in
+            auth.login("hi", "hello");
+
+            // Pwede na magamit anywhere sa app if need man niya ang signed in user
+            user = auth.getUser();
+
+            // everytime nga mag gamit sa currentUser sa auth, dapat i check muna if di siya
+            // null, kay possible nga null siya
+            if (user == null) {
+                return;
+            }
+
+            System.out.println("Current user with id:" + user.getId());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
