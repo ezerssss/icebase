@@ -23,10 +23,13 @@ public class MenuTitle {
 
     public static final void displayStoreName(String name) {
         String storeName = name.toUpperCase();
+        int nameLength = storeName.length();
+        int paddingLeft = (53 - nameLength) / 2;
+        int paddingRight = 53 - nameLength - paddingLeft;
         displayBorder();
         System.out.printf(Colors.CYAN + "=%53s=\n" + Colors.RESET,
                 " ");
-        System.out.printf(Colors.CYAN + "=%22s%s%22s=\n" + Colors.RESET,
+        System.out.printf(Colors.CYAN + "=%" + paddingLeft + "s%s%" + paddingRight + "s=\n" + Colors.RESET,
                 " ", storeName, " ");
         System.out.printf(Colors.CYAN + "=%53s=\n" + Colors.RESET,
                 " ");
