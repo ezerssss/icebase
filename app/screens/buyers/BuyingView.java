@@ -1,23 +1,25 @@
-package icebase.app;
+package icebase.app.screens.buyers;
+
+import icebase.app.App;
 
 import java.util.Scanner;
 
-public class CategoryView {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+import icebase.app.MenuTitle;
+import icebase.app.screens.Screen;
+
+public class BuyingView implements Screen {
+
+    public void display() {
+        Scanner sc = App.sc;
         int choice;
         String storeName = "STORE X"; // stand-in value, should be set from constructor
-        String[] categoryList = { "Category A", "Category B", "Category C" }; // stand-in list
+        String[] categoryList = { "Category A", "Category B", "Category C", "Return" }; // stand-in list
         int range = categoryList.length;
 
         while (true) {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("[CATEGORIES]");
-            for (int i = 0; i < range; i++) {
-                System.out.printf(
-                        "\t\t[%d] - %s%n", i + 1, categoryList[i]);
-            }
-            System.out.printf("\t\t[%d] - Return%n", range + 1);
+            MenuTitle.displayOptions(categoryList);
 
             System.out.print("\nChoice: ");
             try {
@@ -32,6 +34,5 @@ public class CategoryView {
             }
         }
 
-        sc.close();
     }
 }
