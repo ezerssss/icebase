@@ -40,7 +40,7 @@ public class Auth {
     public User login(String username, String password)
             throws UserNotFoundException, IncorrectPasswordException, IOException,
             ArrayIndexOutOfBoundsException, NumberFormatException {
-        List<Doc> docs = USERS_COLLECTION.where(username, AUTH_FIELD.USER_ID.index);
+        List<Doc> docs = USERS_COLLECTION.where(username, AUTH_FIELD.USERNAME.index);
 
         if (docs.isEmpty()) {
             throw new UserNotFoundException();
