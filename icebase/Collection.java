@@ -90,7 +90,7 @@ public class Collection implements IData {
         }
     }
 
-    public List<Doc> where(String query, int field) throws IOException, ArrayIndexOutOfBoundsException {
+    public List<Doc> where(String query, int fieldIndex) throws IOException, ArrayIndexOutOfBoundsException {
         String regex = String.format("(?<![a-zA-Z ])%s(?![a-zA-Z ])", query);
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
@@ -102,24 +102,23 @@ public class Collection implements IData {
 
         try (Stream<Path> files = Files.walk(this.path)) {
             files.filter(Files::isRegularFile).forEach(file -> {
-                String filePath = file.toString();
+                String fileData = this.safeReadFile(file);
 
+                String filePath = file.toString();
                 String[] pathSegments = filePath.split(Pattern.quote(File.separator));
                 int segmentLength = pathSegments.length;
-
                 String documentName = pathSegments[segmentLength - 1].split(Pattern.quote("."))[0];
-                String fileData = this.safeReadFile(file);
 
                 Matcher matcher = pattern.matcher(fileData);
 
                 if (matcher.find()) {
                     String[] dataFields = fileData.split(",");
 
-                    if (field >= dataFields.length) {
+                    if (fieldIndex >= dataFields.length) {
                         return;
                     }
 
-                    if (dataFields[field].equals(query)) {
+                    if (dataFields[fieldIndex].equals(query)) {
                         docs.add(new Doc(this, documentName));
                     }
                 }

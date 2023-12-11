@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import icebase.icebase.User;
 import icebase.icebase.Auth;
-import icebase.icebase.Db;
 
 public class App {
 
@@ -25,12 +24,12 @@ public class App {
 
             // setup sa account
             // might error if i run mo twice, so just delete lang sa users nga data folder
-            User user = auth.signUp("hi", "hello");
+            User user = auth.signUp("asdasd", "hello");
             user.setStoreId("shitStoreID"); // generated random uid ni siya pero yeah
             user.setMoney(9999);
 
             // Actual logging in
-            auth.login("hi", "hello");
+            auth.login("hi", "helloSS");
 
             // Pwede na magamit anywhere sa app if need man niya ang signed in user
             user = auth.getUser();

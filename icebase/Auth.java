@@ -9,15 +9,20 @@ import icebase.icebase.exceptions.IncorrectPasswordException;
 import icebase.icebase.exceptions.InvalidUsernameException;
 import icebase.icebase.exceptions.UserNotFoundException;
 
+enum AUTH_FIELD {
+    USER_ID(0), USERNAME(1), PASSWORD(2), STORE_ID(3), MONEY(4);
+
+    public final int index;
+
+    AUTH_FIELD(int fieldIndex) {
+        this.index = fieldIndex;
+    }
+}
+
 public class Auth {
     private static Auth auth;
     public static final String USERS_PATH = String.join(File.separator, Db.DATA_ROOT_PATH, "users");
-    private static final Collection USERS_COLLECTION = new Collection("users");
-    private static final int USER_ID = 0;
-    private static final int USERNAME = 1;
-    private static final int PASSWORD = 2;
-    private static final int STORE_ID = 3;
-    private static final int MONEY = 4;
+    private static final Collection USERS_COLLECTION = Db.getDb().collection("users");
     private User currentUser;
 
     public static Auth getAuth() {
@@ -35,7 +40,7 @@ public class Auth {
     public User login(String username, String password)
             throws UserNotFoundException, IncorrectPasswordException, IOException,
             ArrayIndexOutOfBoundsException, NumberFormatException {
-        List<Doc> docs = USERS_COLLECTION.where(username, USERNAME);
+        List<Doc> docs = USERS_COLLECTION.where(username, AUTH_FIELD.USER_ID.index);
 
         if (docs.isEmpty()) {
             throw new UserNotFoundException();
@@ -46,13 +51,14 @@ public class Auth {
         Doc userDoc = docs.get(0);
         String[] data = userDoc.data().split(",");
 
-        if (!data[PASSWORD].equals(password)) {
+        if (!data[AUTH_FIELD.PASSWORD.index].equals(password)) {
             throw new IncorrectPasswordException();
         }
 
-        User user = new User(data[USER_ID], data[USERNAME], data[PASSWORD], userDoc);
-        user.setStoreId(data[STORE_ID]);
-        user.setMoney(Double.parseDouble(data[MONEY]));
+        User user = new User(data[AUTH_FIELD.USER_ID.index], data[AUTH_FIELD.USERNAME.index],
+                data[AUTH_FIELD.PASSWORD.index], userDoc);
+        user.setStoreId(data[AUTH_FIELD.STORE_ID.index]);
+        user.setMoney(Double.parseDouble(data[AUTH_FIELD.MONEY.index]));
 
         this.currentUser = user;
 
@@ -61,7 +67,7 @@ public class Auth {
 
     public User signUp(String username, String password) throws InvalidUsernameException, IOException {
         // Check if username already exists
-        List<Doc> docs = USERS_COLLECTION.where(username, USERNAME);
+        List<Doc> docs = USERS_COLLECTION.where(username, AUTH_FIELD.USERNAME.index);
 
         if (!docs.isEmpty()) {
             throw new InvalidUsernameException();
