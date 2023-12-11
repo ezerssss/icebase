@@ -1,9 +1,6 @@
 package icebase.app;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import icebase.icebase.Icebase;
 
 public class ItemList {
     ItemList() {
@@ -16,7 +13,6 @@ public class ItemList {
     }
 
     public static void main(String[] args) {
-        Icebase ib = new Icebase();
         Scanner sc = new Scanner(System.in);
         int choice;
         String storeName = "STORE X"; // stand-in value, should be set from constructor
