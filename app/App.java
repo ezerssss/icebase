@@ -7,7 +7,6 @@ import icebase.icebase.Auth;
 
 public class App {
     public static void main(String[] args) {
-        Icebase ib = new Icebase();
         Scanner sc = new Scanner(System.in);
 
         // Splash Screen
