@@ -35,4 +35,13 @@ public class MenuTitle {
                 " ");
         MenuTitle.displayBorder();
     }
+
+    public static final void displayOptions(String[] optionsList) {
+        System.out.println("");
+        for (int i = 0; i < optionsList.length; i++) {
+            System.out.printf(
+                    "\t%13s[%d] %s\n", " ", i + 1, optionsList[i]);
+        }
+        System.out.println("");
+    }
 }

@@ -1,32 +1,26 @@
-package icebase.app;
+package icebase.app.screens.buyers;
 
 import java.util.Scanner;
 
-public class ItemList {
-    ItemList() {
+import icebase.app.App;
+import icebase.app.MenuTitle;
+import icebase.app.screens.Screen;
+import java.util.Scanner;
 
-    }
+public class BuyingItemList implements Screen {
 
-    public static void buyItem(String item) {
-        System.out.println(item);
-        // display other item attributes
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public void display() {
+        Scanner sc = App.sc;
         int choice;
         String storeName = "STORE X"; // stand-in value, should be set from constructor
         String categoryName = "CATEGORY X"; // stand-in value, should be set from constructor
-        String[] itemList = { "Item A", "Item B", "Item C" }; // fetch from icebase
+        String[] itemList = { "Item A", "Item B", "Item C", "Return" }; // fetch from icebase
         int range = itemList.length;
+
         while (true) {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("[" + categoryName + "]");
-            for (int i = 0; i < range; i++) {
-                System.out.printf(
-                        "\t\t[%d] - %s%n", i + 1, itemList[i]);
-            }
-            System.out.printf("\t\t[%d] - Return%n", range + 1);
+            MenuTitle.displayOptions(itemList);
 
             System.out.print("\nChoice: ");
             try {
@@ -40,7 +34,11 @@ public class ItemList {
                 System.out.println("Please choose from the given options...\n");
             }
         }
-
-        sc.close();
     }
+
+    public static void buyItem(String item) {
+        System.out.println(item);
+        // display other item attributes
+    }
+
 }
