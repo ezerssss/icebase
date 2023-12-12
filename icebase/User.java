@@ -2,6 +2,8 @@ package icebase.icebase;
 
 import java.io.IOException;
 
+import icebase.icebase.enums.USER_FIELD;
+
 public class User {
     private final String id;
     private final Doc userDoc;
@@ -10,11 +12,18 @@ public class User {
     private String storeId;
     private double money;
 
-    public User(String id, String username, String password, Doc userDoc) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    public User(Doc userDoc) throws IOException {
+        String[] data = userDoc.data().split(",");
+
+        this.id = data[USER_FIELD.USER_ID.index];
+        this.username = data[USER_FIELD.USERNAME.index];
+        this.password = data[USER_FIELD.PASSWORD.index];
         this.userDoc = userDoc;
+
+        if (data.length > 3) {
+            this.storeId = data[USER_FIELD.STORE_ID.index];
+            this.money = Double.parseDouble(data[USER_FIELD.MONEY.index]);
+        }
     }
 
     public String getId() {
@@ -55,7 +64,7 @@ public class User {
 
     private void updateDatabaseData() {
         try {
-            String updatedData = String.join(",", this.getData());
+            String updatedData = this.toCSVString();
             this.userDoc.setData(updatedData);
         } catch (IOException e) {
             System.out.println("Something went wrong with updating user data to the database.\n" + e.getMessage());
@@ -73,7 +82,6 @@ public class User {
         this.money += amount;
 
         this.updateDatabaseData();
-
     }
 
     public void decreaseMoney(double amount) {
@@ -83,7 +91,8 @@ public class User {
         this.updateDatabaseData();
     }
 
-    public String[] getData() {
-        return new String[] { this.id, this.username, this.password, this.storeId, Double.toString(this.money) };
+    public String toCSVString() {
+        String[] data = { this.id, this.username, this.password, this.storeId, Double.toString(this.money) };
+        return String.join(",", data);
     }
 }

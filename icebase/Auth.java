@@ -2,22 +2,12 @@ package icebase.icebase;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
+import icebase.icebase.enums.USER_FIELD;
 import icebase.icebase.exceptions.IncorrectPasswordException;
 import icebase.icebase.exceptions.InvalidUsernameException;
 import icebase.icebase.exceptions.UserNotFoundException;
-
-enum AUTH_FIELD {
-    USER_ID(0), USERNAME(1), PASSWORD(2), STORE_ID(3), MONEY(4);
-
-    public final int index;
-
-    AUTH_FIELD(int fieldIndex) {
-        this.index = fieldIndex;
-    }
-}
 
 public class Auth {
     private static Auth auth;
@@ -40,7 +30,7 @@ public class Auth {
     public User login(String username, String password)
             throws UserNotFoundException, IncorrectPasswordException, IOException,
             ArrayIndexOutOfBoundsException, NumberFormatException {
-        List<Doc> docs = USERS_COLLECTION.where(username, AUTH_FIELD.USERNAME.index);
+        QueryList docs = USERS_COLLECTION.where(username, USER_FIELD.USERNAME.index);
 
         if (docs.isEmpty()) {
             throw new UserNotFoundException();
@@ -51,15 +41,11 @@ public class Auth {
         Doc userDoc = docs.get(0);
         String[] data = userDoc.data().split(",");
 
-        if (!data[AUTH_FIELD.PASSWORD.index].equals(password)) {
+        if (!data[USER_FIELD.PASSWORD.index].equals(password)) {
             throw new IncorrectPasswordException();
         }
 
-        User user = new User(data[AUTH_FIELD.USER_ID.index], data[AUTH_FIELD.USERNAME.index],
-                data[AUTH_FIELD.PASSWORD.index], userDoc);
-        user.setStoreId(data[AUTH_FIELD.STORE_ID.index]);
-        user.setMoney(Double.parseDouble(data[AUTH_FIELD.MONEY.index]));
-
+        User user = new User(userDoc);
         this.currentUser = user;
 
         return user;
@@ -67,7 +53,7 @@ public class Auth {
 
     public User signUp(String username, String password) throws InvalidUsernameException, IOException {
         // Check if username already exists
-        List<Doc> docs = USERS_COLLECTION.where(username, AUTH_FIELD.USERNAME.index);
+        QueryList docs = USERS_COLLECTION.where(username, USER_FIELD.USERNAME.index);
 
         if (!docs.isEmpty()) {
             throw new InvalidUsernameException();
@@ -81,6 +67,6 @@ public class Auth {
         // saves the user to the database
         USERS_COLLECTION.setDoc(userDoc, userData);
 
-        return new User(userId, username, password, userDoc);
+        return new User(userDoc);
     }
 }
