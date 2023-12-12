@@ -1,45 +1,68 @@
 package icebase.app.screens.home;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import icebase.app.App;
+import icebase.app.api.API;
+import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.MenuTitle;
+import icebase.app.Router;
 import icebase.app.screens.Screen;
+import icebase.app.types.Store;
+import icebase.icebase.Auth;
+import icebase.icebase.User;
 
 public class StoreList implements Screen {
     public void display() {
         Scanner sc = App.sc;
         int choice;
-        ArrayList<String> storeNames = new ArrayList<String>();
+        Store chosenStore;
+        Auth currentUser = Auth.getAuth();
 
-        ArrayList<String> stores = new ArrayList<String>(); // fecth from icebase (type should be Stores)
-        stores.add("Store A"); // stand-in value
-        stores.add("Store B");
-        stores.add("Store C");
+        List<Store> stores = new ArrayList<>();
+        ArrayList<String> storeNames = new ArrayList<>();
 
-        for (String store : stores) { // String -> Store
-            storeNames.add(store); // store -> store.getName()
+        // Gets names of each stores for options list
+        try {
+            stores = API.getStores();
+
+            for (Store store : stores) {
+                storeNames.add(store.getName());
+            }
+            storeNames.add("Return");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
-        storeNames.add("Return");
-
-        int range = storeNames.size();
 
         while (true) {
             MenuTitle.displayMainTitle();
-            MenuTitle.displaySubTitle("[STORES]");
-            // MenuTitle.displayOptions(storeNames);
+            MenuTitle.displaySubTitle("STORES");
+            MenuTitle.displayOptions(storeNames);
 
             try {
                 System.out.print("Choice: ");
                 choice = Integer.parseInt(sc.nextLine());
-                if (choice == range + 1) {
+                if (choice == storeNames.size()) {
                     return;
                 }
-                System.out.println(storeNames.get(choice));
-                // BuyingView(stores.get(choice));
+
+                chosenStore = stores.get(choice - 1);
+                if (chosenStore.getSellerId().equals(currentUser.getUser().getId())) {
+                    Router.navigate(SCREEN_ENUM.SELLING_VIEW);
+                } else {
+                    // Router.navigate(SCREEN_ENUM.BUYING_VIEW);
+
+                    // For testing
+                    System.out.println("BUYING VIEW");
+                }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("Please choose from the given options...\n");
+
             }
         }
+
     }
 }
