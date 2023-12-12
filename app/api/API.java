@@ -176,4 +176,19 @@ public class API {
         Doc itemDoc = db.collection(COLLECTION_ENUM.ITEMS.value).doc(itemId);
         itemDoc.setData(itemData);
     }
+
+    // GLOBAL ITEM SEARCH
+    public static List<Item> itemSearch(String query) throws IOException, CategoryDoesNotExistException {
+        List<Item> items = new ArrayList<>();
+
+        QueryList docs = db.collection(COLLECTION_ENUM.ITEMS.value).where(query, ITEM_FIELD.ITEM_NAME.index);
+
+        for (Doc doc : docs) {
+            Item item = ItemFactory.createItem(doc);
+
+            items.add(item);
+        }
+
+        return items;
+    }
 }
