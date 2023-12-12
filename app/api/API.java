@@ -23,8 +23,8 @@ import icebase.icebase.User;
 import icebase.icebase.enums.USER_FIELD;
 
 public class API {
-    public static final Db db = Db.getDb();
-    public static final Auth auth = Auth.getAuth();
+    private static final Db db = Db.getDb();
+    private static final Auth auth = Auth.getAuth();
 
     // USER
     public static void setupUser(User user, String storeName, double startingMoney) throws IOException {
