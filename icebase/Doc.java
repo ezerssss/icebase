@@ -43,13 +43,13 @@ public class Doc implements IData {
                 stringData.append(currentLine);
             }
 
-            return stringData.toString();
+            return stringData.toString().trim();
         }
     }
 
     public void setData(String data) throws IOException {
-        if (!this.exists()) {
-            path.toFile().mkdir();
+        if (!this.collection.exists()) {
+            this.collection.createFolder();
         }
 
         try (FileWriter fw = new FileWriter(this.documentPath)) {

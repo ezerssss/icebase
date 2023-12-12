@@ -36,8 +36,39 @@ public class Collection implements IData {
         return this.collectionPath;
     }
 
+    public void createFolder() {
+        this.path.toFile().mkdir();
+    }
+
     public Doc doc(String documentName) {
         return new Doc(this, documentName);
+    }
+
+    private String getFileName(String filePath) {
+        String[] pathSegments = filePath.split(Pattern.quote(File.separator));
+        int segmentLength = pathSegments.length;
+        String documentName = pathSegments[segmentLength - 1].split(Pattern.quote("."))[0];
+
+        return documentName;
+    }
+
+    public List<Doc> getDocs() throws IOException {
+        List<Doc> docs = new ArrayList<>();
+
+        if (!this.exists()) {
+            return docs;
+        }
+
+        try (Stream<Path> files = Files.walk(this.path)) {
+            files.filter(Files::isRegularFile).forEach(file -> {
+                String filePath = file.toString();
+                String documentName = this.getFileName(filePath);
+
+                docs.add(new Doc(this, documentName));
+            });
+        }
+
+        return docs;
     }
 
     public Doc addDoc(String data) throws IOException {
@@ -45,7 +76,7 @@ public class Collection implements IData {
         String documentPath = String.join(File.separator, this.collectionPath, docID + ".txt");
 
         if (!this.exists()) {
-            path.toFile().mkdir();
+            this.createFolder();
         }
 
         try (FileWriter fw = new FileWriter(documentPath)) {
@@ -57,7 +88,7 @@ public class Collection implements IData {
 
     public Doc setDoc(Doc documentReference, String data) throws IOException {
         if (!this.exists()) {
-            path.toFile().mkdir();
+            this.createFolder();
         }
 
         try (FileWriter fw = new FileWriter(documentReference.getPath())) {
@@ -90,11 +121,11 @@ public class Collection implements IData {
         }
     }
 
-    public List<Doc> where(String query, int fieldIndex) throws IOException, ArrayIndexOutOfBoundsException {
+    public QueryList where(String query, int fieldIndex) throws IOException, ArrayIndexOutOfBoundsException {
         String regex = String.format("(?<![a-zA-Z ])%s(?![a-zA-Z ])", query);
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
-        List<Doc> docs = new ArrayList<>();
+        QueryList docs = new QueryList();
 
         if (!this.exists()) {
             return docs;
@@ -105,9 +136,7 @@ public class Collection implements IData {
                 String fileData = this.safeReadFile(file);
 
                 String filePath = file.toString();
-                String[] pathSegments = filePath.split(Pattern.quote(File.separator));
-                int segmentLength = pathSegments.length;
-                String documentName = pathSegments[segmentLength - 1].split(Pattern.quote("."))[0];
+                String documentName = this.getFileName(filePath);
 
                 Matcher matcher = pattern.matcher(fileData);
 
@@ -118,7 +147,7 @@ public class Collection implements IData {
                         return;
                     }
 
-                    if (dataFields[fieldIndex].equals(query)) {
+                    if (dataFields[fieldIndex].trim().equalsIgnoreCase(query)) {
                         docs.add(new Doc(this, documentName));
                     }
                 }
@@ -127,4 +156,5 @@ public class Collection implements IData {
 
         return docs;
     }
+
 }
