@@ -64,9 +64,9 @@ public class StoreList implements Screen {
                     System.out.println("BUYING VIEW");
                 }
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please choose from the given options...\n");
+                System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
 
             }
         }

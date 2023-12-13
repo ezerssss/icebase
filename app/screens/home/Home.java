@@ -33,11 +33,11 @@ public class Home implements Screen {
                     case 3:
                         return;
                     default:
-                        System.out.println("Please choose from the given options...\n");
+                        System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
             }
         }
     }

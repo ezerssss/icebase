@@ -30,10 +30,10 @@ public class SplashScreen implements Screen {
                 } else if (choice == 3) {
                     break;
                 } else {
-                    System.out.println("Please choose from the given options...\n");
+                    System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
                 }
             } catch (Exception e) {
-                System.out.println("Please choose from the given options...\n");
+                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
             }
 
         }

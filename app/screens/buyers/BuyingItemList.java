@@ -31,7 +31,7 @@ public class BuyingItemList implements Screen {
                 String item = itemList[choice - 1]; // fetch from icebase
                 buyItem(item);
             } catch (Exception e) {
-                System.out.println("Please choose from the given options...\n");
+                System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
             }
         }
     }

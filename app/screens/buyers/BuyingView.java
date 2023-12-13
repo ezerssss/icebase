@@ -30,7 +30,7 @@ public class BuyingView implements Screen {
                 String category = categoryList[choice - 1]; // fetch from icebase
                 System.out.println(category);// go to item list
             } catch (Exception e) {
-                System.out.println("Please choose from the given options...\n");
+                System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
             }
         }
 
