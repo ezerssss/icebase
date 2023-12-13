@@ -9,7 +9,9 @@ import icebase.app.App;
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
 import icebase.app.enums.CATEGORY_ENUM;
+import icebase.app.exceptions.BuyException;
 import icebase.app.exceptions.CategoryDoesNotExistException;
+import icebase.app.exceptions.UnauthorizedException;
 import icebase.app.screens.Screen;
 import icebase.app.types.Store;
 import icebase.app.types.items.Item;
@@ -39,7 +41,7 @@ public class BuyingItemList implements Screen {
         } catch (IOException io) {
             io.printStackTrace();
         } catch (CategoryDoesNotExistException cdne) {
-            cdne.printStackTrace();
+            System.out.println(cdne.getMessage());
         }
 
     }
@@ -68,23 +70,33 @@ public class BuyingItemList implements Screen {
     public void buyItem(Item item) {
         int amount;
         String itemName = item.getName();
+        MenuTitle.displayStoreName(storeName);
+        MenuTitle.displaySubTitle(itemName);
+        item.displayDetails();
+        System.out.println("Current money: " + user.getMoney());
         while (true) {
             try {
-                MenuTitle.displayStoreName(storeName);
-                MenuTitle.displaySubTitle(itemName);
-                item.displayDetails();
-                System.out.println("Current money: " + user.getMoney());
                 System.out.println("Enter quantity: ");
                 amount = Integer.parseInt(sc.nextLine());
                 if (amount <= 0) {
                     throw new Exception();
                 }
-                API.buy(item, amount);
-                return;
+                break;
             } catch (Exception e) {
                 System.out.println("Please enter a valid amount...\n");
             }
         }
-    }
 
+        try {
+            API.buy(item, amount);
+        } catch (UnauthorizedException u) {
+            System.out.println(u.getMessage());
+        } catch (CategoryDoesNotExistException cdne) {
+            System.out.println(cdne.getMessage());
+        } catch (BuyException b) {
+            System.out.println(b.getMessage());
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
 }
