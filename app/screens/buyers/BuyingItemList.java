@@ -38,10 +38,10 @@ public class BuyingItemList implements Screen {
             }
             itemNames.add("return");
 
-        } catch (IOException io) {
-            io.printStackTrace();
         } catch (CategoryDoesNotExistException cdne) {
             System.out.println(cdne.getMessage());
+        } catch (IOException io) {
+            io.printStackTrace();
         }
 
     }
@@ -61,13 +61,22 @@ public class BuyingItemList implements Screen {
                 }
                 Item item = itemList.get(choice - 1);
                 this.buyItem(item);
+            } catch (UnauthorizedException u) {
+                System.out.println(u.getMessage());
+            } catch (CategoryDoesNotExistException cdne) {
+                System.out.println(cdne.getMessage());
+            } catch (BuyException b) {
+                System.out.println(b.getMessage());
+            } catch (IOException io) {
+                io.printStackTrace();
             } catch (Exception e) {
                 System.out.println("Please choose from the given options...\n");
             }
         }
     }
 
-    public void buyItem(Item item) {
+    public void buyItem(Item item)
+            throws UnauthorizedException, CategoryDoesNotExistException, BuyException, IOException {
         int amount;
         String itemName = item.getName();
         MenuTitle.displayStoreName(storeName);
@@ -78,25 +87,14 @@ public class BuyingItemList implements Screen {
             try {
                 System.out.println("Enter quantity: ");
                 amount = Integer.parseInt(sc.nextLine());
-                if (amount <= 0) {
-                    throw new Exception();
+                if (amount > 0) {
+                    break;
                 }
-                break;
-            } catch (Exception e) {
-                System.out.println("Please enter a valid amount...\n");
+                System.out.println("Quantity must be greater than 0. Please try again...\n");
+            } catch (NumberFormatException nf) {
+                System.out.println("Cannot quantity the value. Please try again...\n");
             }
         }
-
-        try {
-            API.buy(item, amount);
-        } catch (UnauthorizedException u) {
-            System.out.println(u.getMessage());
-        } catch (CategoryDoesNotExistException cdne) {
-            System.out.println(cdne.getMessage());
-        } catch (BuyException b) {
-            System.out.println(b.getMessage());
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
+        API.buy(item, amount); // error thrown are catch by the display method so user can choose another item
     }
 }
