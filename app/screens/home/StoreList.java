@@ -17,8 +17,10 @@ public class StoreList implements Screen {
     public void display() {
         Scanner sc = App.sc;
         int choice;
+        Store chosenStore;
         String chosenStoreID;
-        String currentUserID = Auth.getAuth().getUser().getId();
+        User currentUser = Auth.getAuth().getUser();
+        String currentUserID = currentUser.getId();
 
         List<Store> stores = new ArrayList<>();
         ArrayList<String> storeNames = new ArrayList<>();
@@ -51,8 +53,8 @@ public class StoreList implements Screen {
                     return;
                 }
 
-                chosenStoreID = stores.get(choice - 1).getSellerId();
-
+                chosenStore = stores.get(choice - 1);
+                chosenStoreID = chosenStore.getSellerId();
                 if (chosenStoreID.equals(currentUserID)) {
                     Router.navigate(SCREEN_ENUM.SELLING_VIEW);
                 } else {
