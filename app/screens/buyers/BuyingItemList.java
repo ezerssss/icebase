@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import icebase.app.App;
+import icebase.app.ChoiceHelper;
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
 import icebase.app.enums.CATEGORY_ENUM;
@@ -37,7 +38,7 @@ public class BuyingItemList implements Screen {
             for (Item item : itemList) {
                 itemNames.add(item.getName());
             }
-            itemNames.add("return");
+            itemNames.add("Return");
 
         } catch (CategoryDoesNotExistException cdne) {
             System.out.println(cdne.getMessage());
@@ -54,7 +55,7 @@ public class BuyingItemList implements Screen {
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
             try {
-                getChoice(); // gets and validates the choice given by the user
+                ChoiceHelper.getChoice(itemList.size());
                 if (choice == itemList.size()) {
                     return;
                 }
@@ -64,21 +65,6 @@ public class BuyingItemList implements Screen {
                 System.out.println(e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
-    }
-
-    private void getChoice() {
-        while (true) {
-            System.out.print("\nChoice: ");
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-                if (choice > 0 && choice <= itemList.size()) { // meaning within the options
-                    return;
-                }
-                System.out.println("Please choose from the given options...\n");
-            } catch (NumberFormatException nf) {
-                System.out.println("Please choose from the given options...\n");
             }
         }
     }
