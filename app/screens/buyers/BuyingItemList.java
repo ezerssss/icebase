@@ -21,6 +21,7 @@ import icebase.icebase.User;
 public class BuyingItemList implements Screen {
 
     private String storeName;
+    private int choice;
     private String categoryName;
     private List<Item> itemList;
     private ArrayList<String> itemNames;
@@ -43,35 +44,46 @@ public class BuyingItemList implements Screen {
         } catch (IOException io) {
             io.printStackTrace();
         }
-
     }
 
     public void display() {
+        Item item;
+
         while (true) {
-            int choice;
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
-
-            System.out.print("\nChoice: ");
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                getChoice(); // gets and validates the choice given by the user
                 if (choice == itemList.size()) {
                     return;
                 }
-                Item item = itemList.get(choice - 1);
+                item = itemList.get(choice - 1);
                 this.buyItem(item);
             } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
                 System.out.println(e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
+            }
+        }
+    }
+
+    private void getChoice() {
+        while (true) {
+            System.out.print("\nChoice: ");
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+                if (choice > 0 && choice <= itemList.size()) { // meaning within the options
+                    return;
+                }
+                System.out.println("Please choose from the given options...\n");
+            } catch (NumberFormatException nf) {
                 System.out.println("Please choose from the given options...\n");
             }
         }
     }
 
-    public void buyItem(Item item)
+    private void buyItem(Item item)
             throws UnauthorizedException, CategoryDoesNotExistException, BuyException, IOException {
         int amount;
         String itemName = item.getName();
