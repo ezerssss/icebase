@@ -57,7 +57,7 @@ public class BuyingItemList implements Screen {
                 if (choice == itemList.size()) {
                     return;
                 }
-                Item item = itemList.get(choice);
+                Item item = itemList.get(choice - 1);
                 this.buyItem(item);
             } catch (Exception e) {
                 System.out.println("Please choose from the given options...\n");
@@ -72,10 +72,10 @@ public class BuyingItemList implements Screen {
             try {
                 MenuTitle.displayStoreName(storeName);
                 MenuTitle.displaySubTitle(itemName);
-                System.out.println("Current money: " + user.getMoney() + "\n");
                 item.displayDetails();
+                System.out.println("Current money: " + user.getMoney());
                 System.out.println("Enter quantity: ");
-                amount = sc.nextInt();
+                amount = Integer.parseInt(sc.nextLine());
                 if (amount <= 0) {
                     throw new Exception();
                 }
