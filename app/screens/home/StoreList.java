@@ -17,8 +17,8 @@ public class StoreList implements Screen {
     public void display() {
         Scanner sc = App.sc;
         int choice;
-        Store chosenStore;
-        Auth currentUser = Auth.getAuth();
+        String chosenStoreID;
+        String currentUserID = Auth.getAuth().getUser().getId();
 
         List<Store> stores = new ArrayList<>();
         ArrayList<String> storeNames = new ArrayList<>();
@@ -49,8 +49,9 @@ public class StoreList implements Screen {
                     return;
                 }
 
-                chosenStore = stores.get(choice - 1);
-                if (chosenStore.getSellerId().equals(currentUser.getUser().getId())) {
+                chosenStoreID = stores.get(choice - 1).getSellerId();
+
+                if (chosenStoreID.equals(currentUserID)) {
                     Router.navigate(SCREEN_ENUM.SELLING_VIEW);
                 } else {
                     // Router.navigate(SCREEN_ENUM.BUYING_VIEW);
@@ -58,8 +59,10 @@ public class StoreList implements Screen {
                     // For testing
                     System.out.println("BUYING VIEW");
                 }
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please choose from the given options...\n");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
 
             }
         }

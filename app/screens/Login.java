@@ -12,7 +12,7 @@ public class Login implements Screen {
 
     public void display() {
         Scanner sc = App.sc;
-        Auth auth;
+        Auth auth = Auth.getAuth();
         User user;
 
         // Need while loop for error messages
@@ -20,8 +20,6 @@ public class Login implements Screen {
             MenuTitle.displayMainTitle();
             MenuTitle.displaySubTitle("Log-in");
             try {
-                auth = Auth.getAuth();
-
                 System.out.print("Username: ");
                 String username = sc.nextLine();
                 System.out.print("Password: ");

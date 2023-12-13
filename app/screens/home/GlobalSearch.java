@@ -9,5 +9,8 @@ public class GlobalSearch implements Screen {
     public void display() {
         Scanner sc = App.sc;
 
+        // For testing home screen
+        System.out.println("Item Search");
+
     }
 }

@@ -28,7 +28,6 @@ public class Home implements Screen {
                         Router.navigate(SCREEN_ENUM.STORE_LIST);
                         break;
                     case 2:
-                        System.out.println("Item Search");
                         Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
                         break;
                     case 3:
@@ -38,7 +37,7 @@ public class Home implements Screen {
                 }
 
             } catch (Exception e) {
-                System.out.println("Please choose from the given options...\n");
+                System.out.println(e.getMessage());
             }
         }
     }

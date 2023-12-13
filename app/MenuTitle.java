@@ -38,12 +38,12 @@ public class MenuTitle {
         MenuTitle.displayBorder();
     }
 
-    public static final void displayOptions(ArrayList<String> optionsList) {
-        int size = optionsList.size();
+    public static final void displayOptions(ArrayList<String> options) {
+        int size = options.size();
         System.out.println("");
         for (int i = 0; i < size; i++) {
             System.out.printf(
-                    "\t%13s[%d] %s\n", " ", i + 1, optionsList.get(i));
+                    "\t%13s[%d] %s\n", " ", i + 1, options.get(i));
         }
         System.out.println("");
     }
