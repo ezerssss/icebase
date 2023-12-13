@@ -45,6 +45,8 @@ public class StoreList implements Screen {
             try {
                 System.out.print("Choice: ");
                 choice = Integer.parseInt(sc.nextLine());
+
+                // Returns when the last option is picked
                 if (choice == storeNames.size()) {
                     return;
                 }
