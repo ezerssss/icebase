@@ -14,7 +14,7 @@ public class SignUp implements Screen {
         Scanner sc = App.sc;
         while (true) {
             MenuTitle.displayMainTitle();
-            MenuTitle.displaySubTitle("[Sign-up]");
+            MenuTitle.displaySubTitle("Sign-up");
 
             Auth auth = Auth.getAuth();
 
