@@ -39,7 +39,7 @@ public class SignUp implements Screen {
                     storeName = sc.nextLine();
 
                     if (storeName.isEmpty()) {
-                        System.out.println("\nStore name cannot be empty. Please enter a valid store name.");
+                        System.out.println("\nStore name cannot be empty. Please enter a valid store name.\n");
                     }
                 }
 
