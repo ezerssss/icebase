@@ -47,4 +47,8 @@ public class MenuTitle {
         }
         System.out.println("");
     }
+
+    public static final String displayErrorMessage(String errorMessage) {
+        return (Colors.RED + errorMessage Colors.RESET);
+    }
 }

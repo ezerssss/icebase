@@ -1,7 +1,10 @@
 package icebase.app.exceptions;
 
+import icebase.app.MenuTitle;
+
 public class InvalidUserDataException extends Exception {
     public InvalidUserDataException() {
-        super("User has invalid data.");
+        String errorMessage = MenuTitle.displayErrorMessage("User has invalid data.");
+        super(errorMessage);
     }
 }
