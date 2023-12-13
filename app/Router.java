@@ -6,6 +6,7 @@ import icebase.app.screens.*;
 import icebase.app.screens.buyers.*;
 import icebase.app.screens.home.*;
 import icebase.app.screens.sellers.*;
+import icebase.icebase.User;
 import icebase.app.enums.SCREEN_ENUM;
 
 public class Router {
@@ -38,6 +39,15 @@ public class Router {
             case SELLING_VIEW:
                 (new SellingView()).display();
                 break;
+            default:
+                break;
+        }
+    }
+
+    public static void navigate(SCREEN_ENUM screen, User user) {
+        switch (screen) {
+            case SET_UP:
+                (new Setup(user)).display();
             default:
                 break;
         }
