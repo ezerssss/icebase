@@ -19,7 +19,7 @@ public class BuyingView implements Screen {
         while (true) {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("[CATEGORIES]");
-            MenuTitle.displayOptions(categoryList);
+            // MenuTitle.displayOptions(categoryList);
 
             System.out.print("\nChoice: ");
             try {

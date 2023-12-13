@@ -1,5 +1,7 @@
 package icebase.app;
 
+import java.util.ArrayList;;
+
 public class MenuTitle {
     public static final void displayBorder() {
         System.out.println(Colors.CYAN + "=======================================================" + Colors.RESET);
@@ -17,7 +19,7 @@ public class MenuTitle {
     }
 
     public static final void displaySubTitle(String subTitle) {
-        System.out.printf("\n\t%15s%s%15s\n\n",
+        System.out.printf("\n\t%15s[%s]%15s\n\n",
                 " ", subTitle, " ");
     }
 
@@ -36,11 +38,12 @@ public class MenuTitle {
         MenuTitle.displayBorder();
     }
 
-    public static final void displayOptions(String[] optionsList) {
+    public static final void displayOptions(ArrayList<String> options) {
+        int size = options.size();
         System.out.println("");
-        for (int i = 0; i < optionsList.length; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.printf(
-                    "\t%13s[%d] %s\n", " ", i + 1, optionsList[i]);
+                    "\t%13s[%d] %s\n", " ", i + 1, options.get(i));
         }
         System.out.println("");
     }

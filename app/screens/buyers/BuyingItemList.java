@@ -46,7 +46,7 @@ public class BuyingItemList implements Screen {
             int choice;
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("[" + categoryName + "]");
-            MenuTitle.displayOptions(itemList);
+            // MenuTitle.displayOptions(itemList);
 
             System.out.print("\nChoice: ");
             try {
