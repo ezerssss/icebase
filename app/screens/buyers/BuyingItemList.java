@@ -1,9 +1,9 @@
 package icebase.app.screens.buyers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Locale.Category;
 
 import icebase.app.App;
 import icebase.app.MenuTitle;
@@ -16,14 +16,12 @@ import icebase.app.types.items.Item;
 import icebase.icebase.Auth;
 import icebase.icebase.User;
 
-import java.util.Scanner;
-import java.io.IOException;
-
 public class BuyingItemList implements Screen {
 
     private String storeName;
     private String categoryName;
     private List<Item> itemList;
+    private ArrayList<String> itemNames;
     private Scanner sc = App.sc;
     private Auth auth = Auth.getAuth();
     private User user = auth.getUser();
@@ -33,10 +31,15 @@ public class BuyingItemList implements Screen {
         this.categoryName = category.value;
         try {
             this.itemList = API.getStoreItems(store, category);
+            for (Item item : itemList) {
+                itemNames.add(item.getName());
+            }
+            itemNames.add("return");
+
         } catch (IOException io) {
             io.printStackTrace();
-        } catch (CategoryDoesNotExistException cdnee) {
-            cdnee.printStackTrace();
+        } catch (CategoryDoesNotExistException cdne) {
+            cdne.printStackTrace();
         }
 
     }
@@ -45,14 +48,14 @@ public class BuyingItemList implements Screen {
         while (true) {
             int choice;
             MenuTitle.displayStoreName(storeName);
-            MenuTitle.displaySubTitle("[" + categoryName + "]");
-            // MenuTitle.displayOptions(itemList);
+            MenuTitle.displaySubTitle(categoryName);
+            MenuTitle.displayOptions(itemNames);
 
             System.out.print("\nChoice: ");
             try {
                 choice = Integer.parseInt(sc.nextLine());
-                if (choice == itemList.size() + 1) {
-                    break;
+                if (choice == itemList.size()) {
+                    return;
                 }
                 Item item = itemList.get(choice);
                 this.buyItem(item);
@@ -68,7 +71,7 @@ public class BuyingItemList implements Screen {
         while (true) {
             try {
                 MenuTitle.displayStoreName(storeName);
-                MenuTitle.displaySubTitle("[" + itemName + "]");
+                MenuTitle.displaySubTitle(itemName);
                 System.out.println("Current money: " + user.getMoney() + "\n");
                 item.displayDetails();
                 System.out.println("Enter quantity: ");
@@ -77,9 +80,9 @@ public class BuyingItemList implements Screen {
                     throw new Exception();
                 }
                 API.buy(item, amount);
-                break;
+                return;
             } catch (Exception e) {
-                System.out.println("Please enter a valid amount...");
+                System.out.println("Please enter a valid amount...\n");
             }
         }
     }
