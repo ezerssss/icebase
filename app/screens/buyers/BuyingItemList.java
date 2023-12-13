@@ -22,7 +22,6 @@ import icebase.icebase.User;
 public class BuyingItemList implements Screen {
 
     private String storeName;
-    private int choice;
     private String categoryName;
     private List<Item> itemList;
     private ArrayList<String> itemNames;
@@ -49,13 +48,14 @@ public class BuyingItemList implements Screen {
 
     public void display() {
         Item item;
+        int choice;
 
         while (true) {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
             try {
-                ChoiceHelper.getChoice(itemList.size());
+                choice = ChoiceHelper.getChoice(itemList.size());
                 if (choice == itemList.size()) {
                     return;
                 }

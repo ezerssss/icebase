@@ -30,6 +30,7 @@ public class BuyingView implements Screen {
     public void display() {
         CATEGORY_ENUM category;
         int choice;
+
         while (true) {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("CATEGORIES");
