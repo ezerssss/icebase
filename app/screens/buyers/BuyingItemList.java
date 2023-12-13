@@ -61,14 +61,10 @@ public class BuyingItemList implements Screen {
                 }
                 Item item = itemList.get(choice - 1);
                 this.buyItem(item);
-            } catch (UnauthorizedException u) {
-                System.out.println(u.getMessage());
-            } catch (CategoryDoesNotExistException cdne) {
-                System.out.println(cdne.getMessage());
-            } catch (BuyException b) {
-                System.out.println(b.getMessage());
-            } catch (IOException io) {
-                io.printStackTrace();
+            } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 System.out.println("Please choose from the given options...\n");
             }
