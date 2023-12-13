@@ -1,5 +1,6 @@
 package icebase.app.screens;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import icebase.app.*;
@@ -10,10 +11,13 @@ public class SplashScreen implements Screen {
     public void display() {
         Scanner sc = App.sc;
         int choice;
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Log-in");
+        options.add("Sign-up");
+        options.add("Exit");
 
         while (true) {
             MenuTitle.displayMainTitle();
-            String[] options = { "Log-in", "Sign-up", "Exit" };
             MenuTitle.displayOptions(options);
 
             System.out.print("Choice: ");

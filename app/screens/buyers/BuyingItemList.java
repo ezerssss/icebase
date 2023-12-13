@@ -20,7 +20,7 @@ public class BuyingItemList implements Screen {
         while (true) {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("[" + categoryName + "]");
-            MenuTitle.displayOptions(itemList);
+            // MenuTitle.displayOptions(itemList);
 
             System.out.print("\nChoice: ");
             try {
