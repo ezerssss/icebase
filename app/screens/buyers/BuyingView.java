@@ -1,38 +1,46 @@
 package icebase.app.screens.buyers;
 
 import icebase.app.App;
+import icebase.app.ChoiceHelper;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import icebase.app.MenuTitle;
+import icebase.app.Router;
+import icebase.app.enums.CATEGORY_ENUM;
+import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.screens.Screen;
+import icebase.app.types.Store;
 
 public class BuyingView implements Screen {
+    private String storeName;
+    private Store store;
+    private ArrayList<String> categoryNames = new ArrayList<>();
+
+    public BuyingView(Store store) {
+        this.store = store;
+        this.storeName = store.getName();
+        for (CATEGORY_ENUM categoryENUM : CATEGORY_ENUM.values()) {
+            categoryNames.add(categoryENUM.value);
+        }
+        categoryNames.add("Return");
+    }
 
     public void display() {
-        Scanner sc = App.sc;
+        CATEGORY_ENUM category;
         int choice;
-        String storeName = "STORE X"; // stand-in value, should be set from constructor
-        String[] categoryList = { "Category A", "Category B", "Category C", "Return" }; // stand-in list
-        int range = categoryList.length;
 
         while (true) {
             MenuTitle.displayStoreName(storeName);
-            MenuTitle.displaySubTitle("[CATEGORIES]");
-            // MenuTitle.displayOptions(categoryList);
-
-            System.out.print("\nChoice: ");
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-                if (choice == range + 1) {
-                    break;
-                }
-                String category = categoryList[choice - 1]; // fetch from icebase
-                System.out.println(category);// go to item list
-            } catch (Exception e) {
-                System.out.println("Please choose from the given options...\n");
+            MenuTitle.displaySubTitle("CATEGORIES");
+            MenuTitle.displayOptions(categoryNames);
+            choice = ChoiceHelper.getChoice(categoryNames.size());
+            if (choice == categoryNames.size()) {
+                return;
             }
+            category = CATEGORY_ENUM.values()[choice - 1];
+            Router.nagivate(SCREEN_ENUM.BUYING_ITEM_LIST, store, category);
         }
-
     }
 }
