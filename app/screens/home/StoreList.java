@@ -17,6 +17,7 @@ public class StoreList implements Screen {
     public void display() {
         Scanner sc = App.sc;
         int choice;
+
         Store chosenStore;
         String chosenStoreID;
         User currentUser = Auth.getAuth().getUser();
@@ -35,7 +36,7 @@ public class StoreList implements Screen {
             storeNames.add("Return");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
             return;
         }
 

@@ -31,10 +31,10 @@ public class Login implements Screen {
                     break;
                 }
             } catch (UserNotFoundException e) {
-                System.out.println(e.getMessage());
+                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
                 return;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
             }
         }
 
