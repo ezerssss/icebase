@@ -21,7 +21,7 @@ public class PostItem implements Screen {
     }
 
     public void display() {
-        MenuTitle.displaySubTitle("SELL NEW ITEM");
+        MenuTitle.displayPostItem("SELL NEW ITEM");
         MenuTitle.displayOptions(categoryNames);
         int choice = InputHelper.getChoiceInt(categoryNames.size());
         if (choice == categoryNames.size()) {
@@ -35,6 +35,8 @@ public class PostItem implements Screen {
             API.sell(itemData);
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
+
         }
     }
 }
