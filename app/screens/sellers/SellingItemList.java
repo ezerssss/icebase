@@ -50,7 +50,20 @@ public class SellingItemList implements Screen {
             item = itemList.get(choice - 1);
 
             try {
-                manageItem(item);
+                System.out.println("Item: " + item.getName());
+                System.out.println("[1] Edit");
+                System.out.println("[2] Delete");
+                System.out.println("[3] Return");
+
+                choice = InputHelper.getChoiceInt(3);
+
+                if (choice == 1) {
+                    editItemInventory(item);
+                } else if (choice == 2) {
+                    deleteItem(item);
+                } else if (choice == 3) {
+                    break;
+                }
             } catch (DocumentDoesNotExist e) {
                 MenuTitle.printErrorMessage(e.getMessage());
             } catch (IOException io) {
@@ -61,23 +74,6 @@ public class SellingItemList implements Screen {
                 e.printStackTrace();
             }
 
-        }
-
-    }
-
-    private void manageItem(Item item) throws IOException, DocumentDoesNotExist {
-
-        System.out.println("Item: " + item.getName());
-        System.out.println("[1] Edit");
-        System.out.println("[2] Delete");
-        System.out.println("[3] Return");
-
-        int choice = InputHelper.getChoiceInt(3);
-
-        if (choice == 1) {
-            editItemInventory(item);
-        } else if (choice == 2) {
-            deleteItem(item);
         }
 
     }
