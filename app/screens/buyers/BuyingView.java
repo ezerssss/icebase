@@ -19,7 +19,7 @@ public class BuyingView implements Screen {
         this.store = store;
         this.storeName = store.getName();
         for (CATEGORY_ENUM categoryENUM : CATEGORY_ENUM.values()) {
-            categoryNames.add(categoryENUM.value);
+            categoryNames.add(categoryENUM.value.toUpperCase());
         }
         categoryNames.add("Return");
     }
