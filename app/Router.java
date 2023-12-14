@@ -53,19 +53,11 @@ public class Router {
             case BUYING_VIEW:
                 (new BuyingView(store)).display();
                 break;
-<<<<<<< HEAD
-            case SELLING_VIEW:
-                (new SellingView(store)).display();
-                break;
-            case SELLING_ITEM_LIST:
-                (new SellingItemList(store)).display();
-=======
             case SELLING_ITEM_LIST:
                 (new SellingItemList(store)).display();
                 break;
             case SELLING_VIEW:
                 (new SellingView(store)).display();
->>>>>>> 5202fc00715ce7cce88fa3d0c1044e9a8b610873
                 break;
             default:
                 break;
