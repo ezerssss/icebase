@@ -28,7 +28,7 @@ public class BuyingItemList implements Screen {
 
     public BuyingItemList(Store store, CATEGORY_ENUM category) {
         this.storeName = store.getName();
-        this.categoryName = category.value;
+        this.categoryName = category.value.toUpperCase();
         try {
             this.itemList = API.getStoreItems(store, category);
             for (Item item : itemList) {

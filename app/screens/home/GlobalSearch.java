@@ -52,11 +52,11 @@ public class GlobalSearch implements Screen {
                     break;
                 }
             } catch (CategoryDoesNotExistException | IOException e) {
-                System.out.println("Something went wrong with searching the database.");
+                MenuTitle.printErrorMessage("Something went wrong with searching the database.");
 
                 e.printStackTrace();
             } catch (Exception e) {
-                System.out.println("Unexpected error.");
+                MenuTitle.printErrorMessage("Unexpected error.");
 
                 e.printStackTrace();
             }

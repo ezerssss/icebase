@@ -11,8 +11,6 @@ public class ItemDataFactory {
     public static String[] createNewItem(CATEGORY_ENUM category) {
         List<String> data = new ArrayList<>();
 
-        System.out.print("Enter Item Name: ");
-
         String name = InputHelper.getNonEmptyString("Enter item name: ", "Item name cannot be empty.");
         data.add(name);
 
