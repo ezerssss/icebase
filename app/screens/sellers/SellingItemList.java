@@ -55,17 +55,17 @@ public class SellingItemList implements Screen {
             }
             item = itemList.get(choice - 1);
 
-            try{
+            try {
                 manageItem(item);
-            }catch(){
-
+            } catch (IOException io) {
+                io.printStackTrace();
             }
 
         }
 
     }
 
-    private void manageItem(Item item) {
+    private void manageItem(Item item) throws IOException {
 
         System.out.println("Item: " + item.getName());
         System.out.println("[1] Edit");
@@ -82,12 +82,13 @@ public class SellingItemList implements Screen {
 
     }
 
-    private void editItemInventory(Item item) {
+    private void editItemInventory(Item item) throws IOException {
         int quantity = InputHelper.getPositiveInt("\nQuantity: ", "");
         double price = InputHelper.getPositiveDouble("Price: ", "");
+        item.setStock(quantity);
     }
 
-    private void deleteItem(Item item) {
+    private void deleteItem(Item item) throws IOException {
         //
     }
 }
