@@ -17,25 +17,21 @@ public class Home implements Screen {
         options.add("Item Search");
         options.add("Log-out");
 
+        int range = options.size();
+
         while (true) {
             MenuTitle.displayMainTitle();
             MenuTitle.displayOptions(options);
-            System.out.print("Choice: ");
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-                switch (choice) {
-                    case 1:
-                        Router.navigate(SCREEN_ENUM.STORE_LIST);
-                        break;
-                    case 2:
-                        Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
-                        break;
-                    case 3:
-                        return;
-                    default:
-                        System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
-                }
 
+            try {
+                choice = ChoiceHelper.getChoice(range);
+                if (choice == 1) {
+                    Router.navigate(SCREEN_ENUM.STORE_LIST);
+                } else if (choice == 2) {
+                    Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
+                } else {
+                    return;
+                }
             } catch (Exception e) {
                 System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
             }

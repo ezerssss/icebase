@@ -29,7 +29,7 @@ public class Setup implements Screen {
 
             if (storeName.isEmpty()) {
                 System.out.println(
-                        MenuTitle.getErrorMessage("\nStore name cannot be empty. Please enter a valid store name.\n"));
+                        MenuTitle.getErrorMessage("Store name cannot be empty. Please enter a valid store name."));
             }
         }
 

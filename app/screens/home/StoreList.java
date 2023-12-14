@@ -3,7 +3,11 @@ package icebase.app.screens.home;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.security.auth.callback.ChoiceCallback;
+
 import icebase.app.App;
+import icebase.app.ChoiceHelper;
 import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.MenuTitle;
@@ -40,17 +44,16 @@ public class StoreList implements Screen {
             return;
         }
 
+        int range = storeNames.size();
+
         while (true) {
             MenuTitle.displayMainTitle();
             MenuTitle.displaySubTitle("STORES");
             MenuTitle.displayOptions(storeNames);
 
             try {
-                System.out.print("Choice: ");
-                choice = Integer.parseInt(sc.nextLine());
-
-                // Returns when the last option is picked
-                if (choice == storeNames.size()) {
+                choice = ChoiceHelper.getChoice(range);
+                if (choice == range) {
                     return;
                 }
 
@@ -59,13 +62,8 @@ public class StoreList implements Screen {
                 if (chosenStoreID.equals(currentUserID)) {
                     Router.navigate(SCREEN_ENUM.SELLING_VIEW);
                 } else {
-                    // Router.navigate(SCREEN_ENUM.BUYING_VIEW);
-
-                    // For testing
-                    System.out.println("BUYING VIEW");
+                    Router.navigate(SCREEN_ENUM.BUYING_VIEW, chosenStore);
                 }
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
             } catch (Exception e) {
                 System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import icebase.app.App;
+import icebase.app.ChoiceHelper;
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
 import icebase.app.enums.CATEGORY_ENUM;
@@ -36,42 +37,39 @@ public class BuyingItemList implements Screen {
             for (Item item : itemList) {
                 itemNames.add(item.getName());
             }
-            itemNames.add("return");
+            itemNames.add("Return");
 
         } catch (CategoryDoesNotExistException cdne) {
             System.out.println(MenuTitle.getErrorMessage(cdne.getMessage()));
         } catch (IOException io) {
             io.printStackTrace();
         }
-
     }
 
     public void display() {
+        Item item;
+        int choice;
+
         while (true) {
-            int choice;
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
-
-            System.out.print("\nChoice: ");
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                choice = ChoiceHelper.getChoice(itemList.size());
                 if (choice == itemList.size()) {
                     return;
                 }
-                Item item = itemList.get(choice - 1);
+                item = itemList.get(choice - 1);
                 this.buyItem(item);
             } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
                 System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                System.out.println(MenuTitle.getErrorMessage("Please choose from the given options...\n"));
             }
         }
     }
 
-    public void buyItem(Item item)
+    private void buyItem(Item item)
             throws UnauthorizedException, CategoryDoesNotExistException, BuyException, IOException {
         int amount;
         String itemName = item.getName();

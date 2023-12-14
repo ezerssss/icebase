@@ -1,6 +1,7 @@
 package icebase.app.screens;
 
 import icebase.app.App;
+import icebase.app.Colors;
 import icebase.app.MenuTitle;
 import icebase.app.Router;
 import icebase.app.api.API;
@@ -33,7 +34,7 @@ public class SignUp implements Screen {
 
                 Router.navigate(SCREEN_ENUM.SET_UP, user);
 
-                System.out.println("Sign-up successful!");
+                System.out.println(Colors.CYAN + "\nSign-up successful!" + Colors.RESET);
                 break;
 
             } catch (InvalidUsernameException e) {
