@@ -13,9 +13,9 @@ public class ChoiceHelper {
                 if (choice > 0 && choice <= choicesLength) { // meaning within the options
                     break;
                 }
-                System.out.println(MenuTitle.getErrorMessage("Please choose from the given options..."));
+                MenuTitle.printErrorMessage("Please choose from the given options...");
             } catch (NumberFormatException nf) {
-                System.out.println(MenuTitle.getErrorMessage("Please input a valid number..."));
+                MenuTitle.printErrorMessage("Please input a valid number...");
             }
         }
         return choice;

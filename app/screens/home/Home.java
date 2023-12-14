@@ -33,7 +33,7 @@ public class Home implements Screen {
                     return;
                 }
             } catch (Exception e) {
-                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
+                MenuTitle.printErrorMessage(e.getMessage());
             }
         }
     }

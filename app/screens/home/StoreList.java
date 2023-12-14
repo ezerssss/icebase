@@ -40,7 +40,7 @@ public class StoreList implements Screen {
             storeNames.add("Return");
 
         } catch (Exception e) {
-            System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
+            MenuTitle.printErrorMessage(e.getMessage());
             return;
         }
 
@@ -65,7 +65,7 @@ public class StoreList implements Screen {
                     Router.navigate(SCREEN_ENUM.BUYING_VIEW, chosenStore);
                 }
             } catch (Exception e) {
-                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
+                MenuTitle.printErrorMessage(e.getMessage());
 
             }
         }

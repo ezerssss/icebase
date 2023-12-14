@@ -24,12 +24,11 @@ public class Setup implements Screen {
 
         String storeName = "";
         while (storeName.isEmpty()) {
-            System.out.print("Enter your store name: ");
+            System.out.print("\nEnter your store name: ");
             storeName = sc.nextLine();
 
             if (storeName.isEmpty()) {
-                System.out.println(
-                        MenuTitle.getErrorMessage("Store name cannot be empty. Please enter a valid store name."));
+                MenuTitle.printErrorMessage("Store name cannot be empty. Please enter a valid store name.");
             }
         }
 
@@ -40,21 +39,18 @@ public class Setup implements Screen {
                 String moneyInputStr = sc.nextLine();
 
                 if (moneyInputStr.isEmpty()) {
-                    System.out.println(
-                            MenuTitle.getErrorMessage("Starting money cannot be empty. Please enter a valid amount."));
+                    MenuTitle.printErrorMessage("Starting money cannot be empty. Please enter a valid amount.");
                     continue;
                 }
 
                 startingMoney = Double.parseDouble(moneyInputStr);
 
                 if (startingMoney <= 0) {
-                    System.out.println(MenuTitle
-                            .getErrorMessage("Starting money cannot be 0 or negative. Please enter a valid amount."));
+                    MenuTitle.printErrorMessage("Starting money cannot be 0 or negative. Please enter a valid amount.");
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println(MenuTitle
-                        .getErrorMessage("Invalid input. Please enter a valid numeric value for starting money."));
+                MenuTitle.printErrorMessage("Invalid input. Please enter a valid numeric value for starting money.");
             }
         }
 

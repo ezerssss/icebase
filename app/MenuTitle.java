@@ -48,6 +48,10 @@ public class MenuTitle {
         System.out.println("");
     }
 
+    public static final void printErrorMessage(String errorMessage) {
+        System.out.println(Colors.RED + errorMessage + Colors.RESET);
+    }
+
     public static final String getErrorMessage(String errorMessage) {
         return (Colors.RED + errorMessage + Colors.RESET);
     }

@@ -34,7 +34,7 @@ public class SplashScreen implements Screen {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println(MenuTitle.getErrorMessage(e.getMessage()));
+                MenuTitle.printErrorMessage(e.getMessage());
             }
         }
     }

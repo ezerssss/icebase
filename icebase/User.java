@@ -68,8 +68,8 @@ public class User {
             String updatedData = this.toCSVString();
             this.userDoc.setData(updatedData);
         } catch (IOException e) {
-            System.out.println(MenuTitle.getErrorMessage(
-                    "Something went wrong with updating user data to the database.\n" + e.getMessage()));
+            MenuTitle.printErrorMessage(
+                    "Something went wrong with updating user data to the database.\n" + e.getMessage());
         }
     }
 

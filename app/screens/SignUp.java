@@ -41,10 +41,10 @@ public class SignUp implements Screen {
                 System.out.println(
                         MenuTitle.getErrorMessage("Username already exists. Please choose a different username."));
             } catch (IOException e) {
-                System.out.println(MenuTitle.getErrorMessage("Error occurred while signing up. Please try again."));
+                MenuTitle.printErrorMessage("Error occurred while signing up. Please try again.");
                 e.printStackTrace();
             } catch (Exception e) {
-                System.out.println(MenuTitle.getErrorMessage("An unexpected error occurred. Please try again."));
+                MenuTitle.printErrorMessage("An unexpected error occurred. Please try again.");
                 e.printStackTrace();
             }
         }
