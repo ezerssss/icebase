@@ -39,8 +39,9 @@ public class API {
     }
 
     // STORES AND ITEMS
-    public static Store getUserStore(User user) throws IOException, InvalidUserDataException {
-        QueryList docs = db.collection(COLLECTION_ENUM.STORES.value).where(user.getId(), STORE_FIELD.SELLER_ID.index);
+    public static Store getUserStore(String userId) throws IOException, InvalidUserDataException {
+        QueryList docs = db.collection(COLLECTION_ENUM.STORES.value).where(userId,
+                STORE_FIELD.SELLER_ID.index);
 
         // Should not happen since every user has a store
         if (docs.isEmpty()) {

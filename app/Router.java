@@ -54,17 +54,17 @@ public class Router {
     }
 
     // NOTE: FOR FUTURE SCREENS THAT NEED PARAMETERS
-    // public static void nagivate(SCREEN_ENUM screen, Store store) {
-    // switch (screen) {
-    // case BUYING_VIEW:
-    // (new BuyingView(store)).display();
-    // break;
-    // default:
-    // break;
-    // }
-    // }
+    public static void navigate(SCREEN_ENUM screen, Store store) {
+        switch (screen) {
+            case BUYING_VIEW:
+                (new BuyingView(store)).display();
+                break;
+            default:
+                break;
+        }
+    }
 
-    public static void nagivate(SCREEN_ENUM screen, Store store, CATEGORY_ENUM category) {
+    public static void navigate(SCREEN_ENUM screen, Store store, CATEGORY_ENUM category) {
         switch (screen) {
             case BUYING_ITEM_LIST:
                 (new BuyingItemList(store, category)).display();

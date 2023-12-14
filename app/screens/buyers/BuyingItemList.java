@@ -3,9 +3,7 @@ package icebase.app.screens.buyers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import icebase.app.App;
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
 import icebase.app.enums.CATEGORY_ENUM;
@@ -25,7 +23,6 @@ public class BuyingItemList implements Screen {
     private String categoryName;
     private List<Item> itemList;
     private ArrayList<String> itemNames;
-    private Scanner sc = App.sc;
     private Auth auth = Auth.getAuth();
     private User user = auth.getUser();
 
@@ -40,7 +37,7 @@ public class BuyingItemList implements Screen {
             itemNames.add("Return");
 
         } catch (CategoryDoesNotExistException cdne) {
-            System.out.println(cdne.getMessage());
+            MenuTitle.printErrorMessage(cdne.getMessage());
         } catch (IOException io) {
             io.printStackTrace();
         }
@@ -64,7 +61,7 @@ public class BuyingItemList implements Screen {
             try {
                 buyItem(item);
             } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
-                System.out.println(e.getMessage());
+                MenuTitle.printErrorMessage(e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -73,24 +70,14 @@ public class BuyingItemList implements Screen {
 
     private void buyItem(Item item)
             throws UnauthorizedException, CategoryDoesNotExistException, BuyException, IOException {
-        int amount;
         String itemName = item.getName();
         MenuTitle.displayStoreName(storeName);
         MenuTitle.displaySubTitle(itemName);
         item.displayDetails();
         System.out.println("Current money: " + user.getMoney());
-        while (true) {
-            try {
-                System.out.println("Enter quantity: ");
-                amount = Integer.parseInt(sc.nextLine());
-                if (amount > 0) {
-                    break;
-                }
-                System.out.println("Quantity must be greater than 0. Please try again...\n");
-            } catch (NumberFormatException nf) {
-                System.out.println("Cannot quantity the value. Please try again...\n");
-            }
-        }
+
+        int amount = InputHelper.getPositiveInt("Enter quantity: ",
+                "Quantity must be greater than 0. Please try again...\n");
         API.buy(item, amount); // error thrown are catch by the display method so user can choose another item
     }
 }

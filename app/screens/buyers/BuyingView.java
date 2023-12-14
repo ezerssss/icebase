@@ -37,7 +37,7 @@ public class BuyingView implements Screen {
                 return;
             }
             category = CATEGORY_ENUM.values()[choice - 1];
-            Router.nagivate(SCREEN_ENUM.BUYING_ITEM_LIST, store, category);
+            Router.navigate(SCREEN_ENUM.BUYING_ITEM_LIST, store, category);
         }
     }
 }

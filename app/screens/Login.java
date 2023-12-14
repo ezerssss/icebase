@@ -1,9 +1,8 @@
 package icebase.app.screens;
 
-import java.util.Scanner;
-
 import icebase.app.*;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.icebase.Auth;
 import icebase.icebase.User;
 import icebase.icebase.exceptions.UserNotFoundException;
@@ -11,7 +10,6 @@ import icebase.icebase.exceptions.UserNotFoundException;
 public class Login implements Screen {
 
     public void display() {
-        Scanner sc = App.sc;
         Auth auth = Auth.getAuth();
         User user;
 
@@ -20,10 +18,8 @@ public class Login implements Screen {
             MenuTitle.displayMainTitle();
             MenuTitle.displaySubTitle("Log-in");
             try {
-                System.out.print("Username: ");
-                String username = sc.nextLine();
-                System.out.print("Password: ");
-                String password = sc.nextLine();
+                String username = InputHelper.getNonEmptyString("Username: ", "Username cannot be empty.");
+                String password = InputHelper.getNonEmptyString("Password: ", "Password cannot be empty.");
 
                 user = auth.login(username, password);
 
@@ -31,10 +27,10 @@ public class Login implements Screen {
                     break;
                 }
             } catch (UserNotFoundException e) {
-                System.out.println(e.getMessage());
+                MenuTitle.printErrorMessage(e.getMessage());
                 return;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                MenuTitle.printErrorMessage(e.getMessage());
             }
         }
 
