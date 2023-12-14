@@ -10,6 +10,7 @@ import icebase.app.App;
 import icebase.app.ChoiceHelper;
 import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.app.MenuTitle;
 import icebase.app.Router;
 import icebase.app.screens.Screen;
@@ -52,7 +53,7 @@ public class StoreList implements Screen {
             MenuTitle.displayOptions(storeNames);
 
             try {
-                choice = ChoiceHelper.getChoice(range);
+                choice = InputHelper.getChoiceInt(range);
                 if (choice == range) {
                     return;
                 }

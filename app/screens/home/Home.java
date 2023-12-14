@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import icebase.app.*;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
 
 public class Home implements Screen {
@@ -23,17 +24,17 @@ public class Home implements Screen {
             MenuTitle.displayMainTitle();
             MenuTitle.displayOptions(options);
 
-            try {
-                choice = ChoiceHelper.getChoice(range);
-                if (choice == 1) {
-                    Router.navigate(SCREEN_ENUM.STORE_LIST);
-                } else if (choice == 2) {
-                    Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
-                } else {
-                    return;
-                }
-            } catch (Exception e) {
-                MenuTitle.printErrorMessage(e.getMessage());
+            // try {
+            // } catch (Exception e) {
+            // MenuTitle.printErrorMessage(e.getMessage());
+            // }
+            choice = InputHelper.getChoiceInt(range);
+            if (choice == 1) {
+                Router.navigate(SCREEN_ENUM.STORE_LIST);
+            } else if (choice == 2) {
+                Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
+            } else {
+                return;
             }
         }
     }
