@@ -1,15 +1,12 @@
 package icebase.app.screens.buyers;
 
-import icebase.app.App;
-import icebase.app.ChoiceHelper;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import icebase.app.MenuTitle;
 import icebase.app.Router;
 import icebase.app.enums.CATEGORY_ENUM;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
 import icebase.app.types.Store;
 
@@ -35,7 +32,7 @@ public class BuyingView implements Screen {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle("CATEGORIES");
             MenuTitle.displayOptions(categoryNames);
-            choice = ChoiceHelper.getChoice(categoryNames.size());
+            choice = InputHelper.getChoiceInt(categoryNames.size());
             if (choice == categoryNames.size()) {
                 return;
             }

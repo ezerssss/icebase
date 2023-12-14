@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import icebase.app.App;
-import icebase.app.ChoiceHelper;
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
 import icebase.app.enums.CATEGORY_ENUM;
 import icebase.app.exceptions.BuyException;
 import icebase.app.exceptions.CategoryDoesNotExistException;
 import icebase.app.exceptions.UnauthorizedException;
+import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
 import icebase.app.types.Store;
 import icebase.app.types.items.Item;
@@ -55,7 +55,7 @@ public class BuyingItemList implements Screen {
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
             try {
-                choice = ChoiceHelper.getChoice(itemList.size());
+                choice = InputHelper.getChoiceInt(itemList.size());
                 if (choice == itemList.size()) {
                     return;
                 }
