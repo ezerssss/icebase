@@ -69,6 +69,18 @@ public abstract class Item {
         this.updateDocumentData();
     }
 
+    public void setPrice(double value) throws IOException {
+        value = Math.max(0, value);
+        this.price = value;
+        this.updateDocumentData();
+    }
+
+    public void setStock(int value) throws IOException {
+        value = Math.max(0, value);
+        this.stock = value;
+        this.updateDocumentData();
+    }
+
     public String getCategory() {
         return this.category;
     }
