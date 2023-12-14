@@ -2,12 +2,7 @@ package icebase.app.screens.home;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import javax.security.auth.callback.ChoiceCallback;
-
-import icebase.app.App;
-import icebase.app.ChoiceHelper;
 import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.helpers.InputHelper;
@@ -20,7 +15,6 @@ import icebase.icebase.User;
 
 public class StoreList implements Screen {
     public void display() {
-        Scanner sc = App.sc;
         int choice;
 
         Store chosenStore;

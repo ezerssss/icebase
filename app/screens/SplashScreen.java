@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import icebase.app.*;
-import icebase.app.ChoiceHelper;
 import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.helpers.InputHelper;
 
 public class SplashScreen implements Screen {
 
     public void display() {
-        Scanner sc = App.sc;
         int choice;
 
         ArrayList<String> options = new ArrayList<>();
