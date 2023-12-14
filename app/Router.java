@@ -36,9 +36,6 @@ public class Router {
             case SELLING_ITEM_LIST:
                 (new SellingItemList()).display();
                 break;
-            case SELLING_VIEW:
-                (new SellingView()).display();
-                break;
             default:
                 break;
         }
@@ -58,6 +55,9 @@ public class Router {
         switch (screen) {
             case BUYING_VIEW:
                 (new BuyingView(store)).display();
+                break;
+            case SELLING_VIEW:
+                (new SellingView(store)).display();
                 break;
             default:
                 break;
