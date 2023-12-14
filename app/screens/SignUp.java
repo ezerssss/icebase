@@ -1,6 +1,7 @@
 package icebase.app.screens;
 
 import icebase.app.App;
+import icebase.app.Colors;
 import icebase.app.MenuTitle;
 import icebase.app.Router;
 import icebase.app.api.API;
@@ -33,16 +34,17 @@ public class SignUp implements Screen {
 
                 Router.navigate(SCREEN_ENUM.SET_UP, user);
 
-                System.out.println("Sign-up successful!");
+                System.out.println(Colors.CYAN + "\nSign-up successful!" + Colors.RESET);
                 break;
 
             } catch (InvalidUsernameException e) {
-                System.out.println("Username already exists. Please choose a different username.");
+                System.out.println(
+                        MenuTitle.getErrorMessage("Username already exists. Please choose a different username."));
             } catch (IOException e) {
-                System.out.println("Error occurred while signing up. Please try again.");
+                MenuTitle.printErrorMessage("Error occurred while signing up. Please try again.");
                 e.printStackTrace();
             } catch (Exception e) {
-                System.out.println("An unexpected error occurred. Please try again.");
+                MenuTitle.printErrorMessage("An unexpected error occurred. Please try again.");
                 e.printStackTrace();
             }
         }

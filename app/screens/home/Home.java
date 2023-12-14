@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import icebase.app.*;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
 
 public class Home implements Screen {
@@ -17,27 +18,19 @@ public class Home implements Screen {
         options.add("Item Search");
         options.add("Log-out");
 
+        int range = options.size();
+
         while (true) {
             MenuTitle.displayMainTitle();
             MenuTitle.displayOptions(options);
-            System.out.print("Choice: ");
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-                switch (choice) {
-                    case 1:
-                        Router.navigate(SCREEN_ENUM.STORE_LIST);
-                        break;
-                    case 2:
-                        Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
-                        break;
-                    case 3:
-                        return;
-                    default:
-                        System.out.println("Please choose from the given options...\n");
-                }
 
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            choice = InputHelper.getChoiceInt(range);
+            if (choice == 1) {
+                Router.navigate(SCREEN_ENUM.STORE_LIST);
+            } else if (choice == 2) {
+                Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
+            } else {
+                return;
             }
         }
     }

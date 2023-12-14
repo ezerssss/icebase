@@ -40,7 +40,7 @@ public class BuyingItemList implements Screen {
             itemNames.add("Return");
 
         } catch (CategoryDoesNotExistException cdne) {
-            System.out.println(cdne.getMessage());
+            MenuTitle.printErrorMessage(cdne.getMessage());
         } catch (IOException io) {
             io.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class BuyingItemList implements Screen {
                 item = itemList.get(choice - 1);
                 this.buyItem(item);
             } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
-                System.out.println(e.getMessage());
+                MenuTitle.printErrorMessage(e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -84,9 +84,9 @@ public class BuyingItemList implements Screen {
                 if (amount > 0) {
                     break;
                 }
-                System.out.println("Quantity must be greater than 0. Please try again...\n");
+                MenuTitle.printErrorMessage("Quantity must be greater than 0. Please try again...\n");
             } catch (NumberFormatException nf) {
-                System.out.println("Cannot quantity the value. Please try again...\n");
+                MenuTitle.printErrorMessage("Cannot quantity the value. Please try again...\n");
             }
         }
         API.buy(item, amount); // error thrown are catch by the display method so user can choose another item

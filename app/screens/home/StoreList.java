@@ -3,9 +3,14 @@ package icebase.app.screens.home;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.security.auth.callback.ChoiceCallback;
+
 import icebase.app.App;
+import icebase.app.ChoiceHelper;
 import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.app.MenuTitle;
 import icebase.app.Router;
 import icebase.app.screens.Screen;
@@ -17,6 +22,7 @@ public class StoreList implements Screen {
     public void display() {
         Scanner sc = App.sc;
         int choice;
+
         Store chosenStore;
         String chosenStoreID;
         User currentUser = Auth.getAuth().getUser();
@@ -35,9 +41,11 @@ public class StoreList implements Screen {
             storeNames.add("Return");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            MenuTitle.printErrorMessage(e.getMessage());
             return;
         }
+
+        int range = storeNames.size();
 
         while (true) {
             MenuTitle.displayMainTitle();
@@ -45,11 +53,8 @@ public class StoreList implements Screen {
             MenuTitle.displayOptions(storeNames);
 
             try {
-                System.out.print("Choice: ");
-                choice = Integer.parseInt(sc.nextLine());
-
-                // Returns when the last option is picked
-                if (choice == storeNames.size()) {
+                choice = InputHelper.getChoiceInt(range);
+                if (choice == range) {
                     return;
                 }
 
@@ -58,15 +63,10 @@ public class StoreList implements Screen {
                 if (chosenStoreID.equals(currentUserID)) {
                     Router.navigate(SCREEN_ENUM.SELLING_VIEW);
                 } else {
-                    // Router.navigate(SCREEN_ENUM.BUYING_VIEW);
-
-                    // For testing
-                    System.out.println("BUYING VIEW");
+                    Router.navigate(SCREEN_ENUM.BUYING_VIEW, chosenStore);
                 }
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please choose from the given options...\n");
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                MenuTitle.printErrorMessage(e.getMessage());
 
             }
         }

@@ -2,6 +2,7 @@ package icebase.icebase;
 
 import java.io.IOException;
 
+import icebase.app.MenuTitle;
 import icebase.icebase.enums.USER_FIELD;
 
 public class User {
@@ -67,7 +68,8 @@ public class User {
             String updatedData = this.toCSVString();
             this.userDoc.setData(updatedData);
         } catch (IOException e) {
-            System.out.println("Something went wrong with updating user data to the database.\n" + e.getMessage());
+            MenuTitle.printErrorMessage(
+                    "Something went wrong with updating user data to the database.\n" + e.getMessage());
         }
     }
 
