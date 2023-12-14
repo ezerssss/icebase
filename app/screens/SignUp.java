@@ -1,21 +1,18 @@
 package icebase.app.screens;
 
-import icebase.app.App;
 import icebase.app.Colors;
 import icebase.app.MenuTitle;
 import icebase.app.Router;
-import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
+import icebase.app.helpers.InputHelper;
 import icebase.icebase.Auth;
 import icebase.icebase.User;
 import icebase.icebase.exceptions.InvalidUsernameException;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class SignUp implements Screen {
     public void display() {
-        Scanner sc = App.sc;
         while (true) {
             // handles exceptions
             try {
@@ -24,11 +21,9 @@ public class SignUp implements Screen {
 
                 Auth auth = Auth.getAuth();
 
-                System.out.print("Enter a new username: ");
-                String username = sc.nextLine();
+                String username = InputHelper.getNonEmptyString("Enter a new username: ", "Username cannot be empty.");
 
-                System.out.print("Enter a new password: ");
-                String password = sc.nextLine();
+                String password = InputHelper.getNonEmptyString("Enter a new password: ", "Password cannot be empty.");
 
                 User user = auth.signUp(username, password);
 
