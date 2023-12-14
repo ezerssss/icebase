@@ -1,47 +1,44 @@
 package icebase.app.screens.sellers;
 
+import java.util.ArrayList;
+
 import icebase.app.MenuTitle;
-import icebase.app.api.API;
-import icebase.app.enums.CATEGORY_ENUM;
+import icebase.app.Router;
+import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
 import icebase.app.types.Store;
-import icebase.icebase.Auth;
-import icebase.icebase.User;
-
-import java.util.ArrayList;
 
 public class SellingView implements Screen {
-    private ArrayList<String> categoryNames = new ArrayList<>();
     private Store store;
     private String storeName;
 
     public SellingView(Store store) {
-        for (CATEGORY_ENUM categoryENUM : CATEGORY_ENUM.values()) {
-            categoryNames.add(categoryENUM.value);
-        }
-        categoryNames.add("Return");
-
         this.store = store;
         this.storeName = this.store.getName();
     }
 
     public void display() {
         MenuTitle.displayStoreName(storeName);
-        MenuTitle.displaySubTitle("SELL NEW ITEM");
-        MenuTitle.displayOptions(categoryNames);
-        int choice = InputHelper.getChoiceInt(categoryNames.size());
-        if (choice == categoryNames.size()) {
-            return;
-        }
-        CATEGORY_ENUM category = CATEGORY_ENUM.values()[choice - 1];
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Post Item");
+        options.add("Manage Items");
+        options.add("Exit Store");
 
-        try {
-            String[] itemData = ItemDataFactory.createNewItem(category);
+        int range = options.size();
+        int choice;
 
-            API.sell(itemData);
-        } catch (Exception e) {
-            // TODO: handle exception
+        while (true) {
+            MenuTitle.displayOptions(options);
+
+            choice = InputHelper.getChoiceInt(range);
+            if (choice == 1) {
+                Router.navigate(SCREEN_ENUM.POST_ITEM);
+            } else if (choice == 2) {
+                Router.navigate(SCREEN_ENUM.SELLING_ITEM_LIST);
+            } else {
+                return;
+            }
         }
     }
 }
