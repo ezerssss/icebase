@@ -29,7 +29,7 @@ public class InputHelper {
         String value = "";
 
         while (value.isEmpty()) {
-            System.out.println(titleMessage);
+            System.out.print(titleMessage);
 
             value = sc.nextLine();
 
