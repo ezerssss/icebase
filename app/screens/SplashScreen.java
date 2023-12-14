@@ -25,10 +25,6 @@ public class SplashScreen implements Screen {
             MenuTitle.displayMainTitle();
             MenuTitle.displayOptions(options);
 
-            // try {
-            // } catch (Exception e) {
-            // MenuTitle.printErrorMessage(e.getMessage());
-            // }
             choice = InputHelper.getChoiceInt(range);
             if (choice == 1) {
                 Router.navigate(SCREEN_ENUM.LOGIN);
