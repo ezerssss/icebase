@@ -51,15 +51,16 @@ public class BuyingItemList implements Screen {
             MenuTitle.displayStoreName(storeName);
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
+
+            choice = InputHelper.getChoiceInt(itemNames.size());
+            if (choice == itemNames.size()) {
+                return;
+            }
+
+            item = itemList.get(choice - 1);
+
             try {
-                choice = InputHelper.getChoiceInt(itemNames.size());
-
-                if (choice == itemNames.size()) {
-                    return;
-                }
-
-                item = itemList.get(choice - 1);
-                this.buyItem(item);
+                buyItem(item);
             } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
                 MenuTitle.printErrorMessage(e.getMessage());
             } catch (IOException e) {
