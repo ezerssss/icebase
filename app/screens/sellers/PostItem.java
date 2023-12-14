@@ -1,27 +1,31 @@
 package icebase.app.screens.sellers;
 
-import icebase.app.App;
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
 import icebase.app.enums.CATEGORY_ENUM;
 import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
+import icebase.app.types.Store;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class PostItem implements Screen {
     private ArrayList<String> categoryNames = new ArrayList<>();
+    private Store store;
+    private String storeName;
 
-    public PostItem() {
+    public PostItem(Store store) {
         for (CATEGORY_ENUM categoryENUM : CATEGORY_ENUM.values()) {
             categoryNames.add(categoryENUM.value);
         }
         categoryNames.add("Return");
+
+        this.store = store;
+        this.storeName = this.store.getName();
     }
 
     public void display() {
-        MenuTitle.displaySubTitle("SELL NEW ITEM");
+        MenuTitle.displayStoreName(storeName);
         MenuTitle.displayOptions(categoryNames);
         int choice = InputHelper.getChoiceInt(categoryNames.size());
         if (choice == categoryNames.size()) {
