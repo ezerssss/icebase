@@ -17,15 +17,11 @@ import icebase.icebase.User;
 
 public class SellingItemList implements Screen {
 
-    private Auth auth = Auth.getAuth();
-    private User user = auth.getUser();
     private String storeName;
     private List<Item> itemList;
     private ArrayList<String> itemNames;
-    private Store store;
 
     public SellingItemList(Store store) {
-        this.store = store;
         this.storeName = store.getName();
         try {
             this.itemList = API.getStoreItems(store);
@@ -34,7 +30,7 @@ public class SellingItemList implements Screen {
             }
             itemNames.add("Return");
         } catch (CategoryDoesNotExistException cdne) {
-            System.out.println(cdne.getMessage());
+            MenuTitle.printErrorMessage(cdne.getMessage());
         } catch (IOException io) {
             io.printStackTrace();
         }
@@ -56,7 +52,7 @@ public class SellingItemList implements Screen {
             item = itemList.get(choice - 1);
 
             try {
-                manageItem(item);
+                editItemInventory(item);
             } catch (IOException io) {
                 io.printStackTrace();
             }
@@ -65,30 +61,12 @@ public class SellingItemList implements Screen {
 
     }
 
-    private void manageItem(Item item) throws IOException {
-
-        System.out.println("Item: " + item.getName());
-        System.out.println("[1] Edit");
-        System.out.println("[2] Delete");
-        System.out.println("[3] Return");
-
-        int choice = InputHelper.getChoiceInt(3);
-
-        if (choice == 1) {
-            editItemInventory(item);
-        } else if (choice == 2) {
-            deleteItem(item);
-        }
-
-    }
-
     private void editItemInventory(Item item) throws IOException {
+        System.out.println("Item: " + item.getName());
         int quantity = InputHelper.getPositiveInt("\nQuantity: ", "");
         double price = InputHelper.getPositiveDouble("Price: ", "");
         item.setStock(quantity);
-    }
-
-    private void deleteItem(Item item) throws IOException {
-        //
+        item.setPrice(price);
+        System.out.println("Item successfully updated!!!\n");
     }
 }
