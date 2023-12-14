@@ -52,6 +52,10 @@ public class BuyingItemList implements Screen {
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
 
+            if (itemList.isEmpty()) {
+                MenuTitle.displaySubTitle("No Items");
+            }
+
             choice = InputHelper.getChoiceInt(itemNames.size());
             if (choice == itemNames.size()) {
                 return;

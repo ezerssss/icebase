@@ -35,7 +35,7 @@ public class SellingView implements Screen {
             if (choice == 1) {
                 Router.navigate(SCREEN_ENUM.POST_ITEM);
             } else if (choice == 2) {
-                Router.navigate(SCREEN_ENUM.SELLING_ITEM_LIST);
+                Router.navigate(SCREEN_ENUM.SELLING_ITEM_LIST, store);
             } else {
                 return;
             }
