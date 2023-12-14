@@ -8,48 +8,44 @@ import icebase.app.helpers.InputHelper;
 
 public class ItemDataFactory {
 
-    public static String[] createNewItem(CATEGORY_ENUM category) {
-        List<String> data = new ArrayList<>();
+        public static String[] createNewItem(CATEGORY_ENUM category) {
+                List<String> data = new ArrayList<>();
 
-<<<<<<< HEAD
-        String name = InputHelper.getNonEmptyString("\nEnter item name: ", "\nItem name cannot be empty.");
-=======
-        String name = InputHelper.getNonEmptyString("Enter item name: ", "Item name cannot be empty.");
->>>>>>> main
-        data.add(name);
+                String name = InputHelper.getNonEmptyString("\nEnter item name: ", "\nItem name cannot be empty.");
+                data.add(name);
 
-        double price = InputHelper.getPositiveDouble("\nEnter item price: ",
-                "\nItem price cannot be 0 or negative. Please enter a valid amount.");
-        data.add(Double.toString(price));
+                double price = InputHelper.getPositiveDouble("\nEnter item price: ",
+                                "\nItem price cannot be 0 or negative. Please enter a valid amount.");
+                data.add(Double.toString(price));
 
-        int stock = InputHelper.getPositiveInt("\nEnter item stock: ",
-                "\nItem stock cannot be 0 or negative. Please enter a valid amount.");
-        data.add(Integer.toString(stock));
+                int stock = InputHelper.getPositiveInt("\nEnter item stock: ",
+                                "\nItem stock cannot be 0 or negative. Please enter a valid amount.");
+                data.add(Integer.toString(stock));
 
-        data.add(category.value);
+                data.add(category.value);
 
-        // NOTE: The order matters, it should follow the index indicated in the enum
-        // ITEM_FIELD for each type of item
-        switch (category) {
-            case FOOD:
-                // As you can see the SHELF_LIFE is the last data according to the enum
-                // ITEM_FIELD found in Food.java, so it makes sense that it is the last data to
-                // be added in the data list
-                int shelfLife = InputHelper.getPositiveInt("Enter food shelf life: ",
-                        "Food shelf life cannot be 0 or negative.");
-                data.add(Integer.toString(shelfLife));
+                // NOTE: The order matters, it should follow the index indicated in the enum
+                // ITEM_FIELD for each type of item
+                switch (category) {
+                        case FOOD:
+                                // As you can see the SHELF_LIFE is the last data according to the enum
+                                // ITEM_FIELD found in Food.java, so it makes sense that it is the last data to
+                                // be added in the data list
+                                int shelfLife = InputHelper.getPositiveInt("Enter food shelf life: ",
+                                                "Food shelf life cannot be 0 or negative.");
+                                data.add(Integer.toString(shelfLife));
 
-                // Add more here if may new attributes, remember that order of adding to the
-                // list matters
-                break;
+                                // Add more here if may new attributes, remember that order of adding to the
+                                // list matters
+                                break;
 
-            default:
-                break;
+                        default:
+                                break;
+                }
+
+                String[] dataArray = new String[data.size()];
+                data.toArray(dataArray);
+
+                return dataArray;
         }
-
-        String[] dataArray = new String[data.size()];
-        data.toArray(dataArray);
-
-        return dataArray;
-    }
 }
