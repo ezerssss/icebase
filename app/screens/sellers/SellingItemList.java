@@ -12,9 +12,6 @@ import icebase.app.screens.Screen;
 import icebase.app.types.Store;
 import icebase.app.types.items.Item;
 
-import icebase.icebase.Auth;
-import icebase.icebase.User;
-
 public class SellingItemList implements Screen {
 
     private String storeName;
