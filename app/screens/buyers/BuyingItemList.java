@@ -22,7 +22,7 @@ public class BuyingItemList implements Screen {
     private String storeName;
     private String categoryName;
     private List<Item> itemList;
-    private ArrayList<String> itemNames;
+    private ArrayList<String> itemNames = new ArrayList<>();
     private Auth auth = Auth.getAuth();
     private User user = auth.getUser();
 
@@ -59,7 +59,7 @@ public class BuyingItemList implements Screen {
             item = itemList.get(choice - 1);
 
             try {
-                buyItem(item);
+                this.buyItem(item);
             } catch (UnauthorizedException | CategoryDoesNotExistException | BuyException e) {
                 MenuTitle.printErrorMessage(e.getMessage());
             } catch (IOException e) {

@@ -43,7 +43,7 @@ public class GlobalSearch implements Screen {
                     Double price = item.getPrice();
                     int stock = item.getStock();
 
-                    System.out.printf("%d.   %-20s%-15.2f%-10df%-20s%n", ++count, name, price, stock, storeName);
+                    System.out.printf("%d.   %-20s%-15.2f%-10d%-20s%n", ++count, name, price, stock, storeName);
                 }
 
                 input = InputHelper.getNonEmptyString("\nSearch again? [y/N] ", "");

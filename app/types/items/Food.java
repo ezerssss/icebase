@@ -25,7 +25,7 @@ public class Food extends Item {
         this.id = data[ITEM_FIELD.ITEM_ID.index];
         this.storeId = data[ITEM_FIELD.STORE_ID.index];
         this.sellerId = data[ITEM_FIELD.SELLER_ID.index];
-        this.name = data[ITEM_FIELD.ITEM_ID.index];
+        this.name = data[ITEM_FIELD.ITEM_NAME.index];
         this.price = Double.parseDouble(data[ITEM_FIELD.PRICE.index]);
         this.stock = Integer.parseInt(data[ITEM_FIELD.STOCK.index]);
         this.category = data[ITEM_FIELD.CATEGORY.index];
