@@ -22,7 +22,7 @@ public class BuyingItemList implements Screen {
     private String storeName;
     private String categoryName;
     private List<Item> itemList;
-    private ArrayList<String> itemNames;
+    private ArrayList<String> itemNames = new ArrayList<>();
     private Auth auth = Auth.getAuth();
     private User user = auth.getUser();
 
@@ -52,10 +52,11 @@ public class BuyingItemList implements Screen {
             MenuTitle.displaySubTitle(categoryName);
             MenuTitle.displayOptions(itemNames);
 
-            choice = InputHelper.getChoiceInt(itemList.size());
-            if (choice == itemList.size()) {
+            choice = InputHelper.getChoiceInt(itemNames.size());
+            if (choice == itemNames.size()) {
                 return;
             }
+
             item = itemList.get(choice - 1);
 
             try {

@@ -55,7 +55,7 @@ public class StoreList implements Screen {
                 chosenStore = stores.get(choice - 1);
                 chosenStoreID = chosenStore.getSellerId();
                 if (chosenStoreID.equals(currentUserID)) {
-                    Router.navigate(SCREEN_ENUM.SELLING_VIEW);
+                    Router.navigate(SCREEN_ENUM.SELLING_VIEW, chosenStore);
                 } else {
                     Router.navigate(SCREEN_ENUM.BUYING_VIEW, chosenStore);
                 }
