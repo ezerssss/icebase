@@ -11,15 +11,19 @@ public class ItemDataFactory {
     public static String[] createNewItem(CATEGORY_ENUM category) {
         List<String> data = new ArrayList<>();
 
+<<<<<<< HEAD
+        String name = InputHelper.getNonEmptyString("\nEnter item name: ", "\nItem name cannot be empty.");
+=======
         String name = InputHelper.getNonEmptyString("Enter item name: ", "Item name cannot be empty.");
+>>>>>>> main
         data.add(name);
 
-        double price = InputHelper.getPositiveDouble("Enter item price: ",
-                "Item price cannot be 0 or negative. Please enter a valid amount.");
+        double price = InputHelper.getPositiveDouble("\nEnter item price: ",
+                "\nItem price cannot be 0 or negative. Please enter a valid amount.");
         data.add(Double.toString(price));
 
-        int stock = InputHelper.getPositiveInt("Enter item stock: ",
-                "Item stock cannot be 0 or negative. Please enter a valid amount.");
+        int stock = InputHelper.getPositiveInt("\nEnter item stock: ",
+                "\nItem stock cannot be 0 or negative. Please enter a valid amount.");
         data.add(Integer.toString(stock));
 
         data.add(category.value);
@@ -32,7 +36,7 @@ public class ItemDataFactory {
                 // ITEM_FIELD found in Food.java, so it makes sense that it is the last data to
                 // be added in the data list
                 int shelfLife = InputHelper.getPositiveInt("Enter food shelf life: ",
-                        "Food shelf life cannot be 0 or bitches.");
+                        "Food shelf life cannot be 0 or negative.");
                 data.add(Integer.toString(shelfLife));
 
                 // Add more here if may new attributes, remember that order of adding to the

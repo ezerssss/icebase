@@ -23,6 +23,11 @@ public class MenuTitle {
                 " ", subTitle, " ");
     }
 
+    public static final void displayPostItem(String subTitle) {
+        System.out.printf("\n\t%12s[%s]%12s\n\n",
+                " ", subTitle, " ");
+    }
+
     public static final void displayStoreName(String name) {
         String storeName = name.toUpperCase();
         int nameLength = storeName.length();
@@ -44,6 +49,17 @@ public class MenuTitle {
         for (int i = 0; i < size; i++) {
             System.out.printf(
                     "\t%13s[%d] %s\n", " ", i + 1, options.get(i));
+        }
+        System.out.println("");
+    }
+
+    // re-allign store options in the middle
+    public static final void displayStoreOptions(ArrayList<String> options) {
+        int size = options.size();
+        System.out.println("");
+        for (int i = 0; i < size; i++) {
+            System.out.printf(
+                    "\t%11s[%d] %s\n", " ", i + 1, options.get(i));
         }
         System.out.println("");
     }

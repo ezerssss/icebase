@@ -44,7 +44,7 @@ public class StoreList implements Screen {
         while (true) {
             MenuTitle.displayMainTitle();
             MenuTitle.displaySubTitle("STORES");
-            MenuTitle.displayOptions(storeNames);
+            MenuTitle.displayStoreOptions(storeNames); 
 
             try {
                 choice = InputHelper.getChoiceInt(range);
