@@ -11,6 +11,7 @@ import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
 import icebase.app.types.Store;
 import icebase.app.types.items.Item;
+import icebase.icebase.exceptions.DocumentDoesNotExist;
 
 public class SellingItemList implements Screen {
 
@@ -49,11 +50,34 @@ public class SellingItemList implements Screen {
             item = itemList.get(choice - 1);
 
             try {
-                editItemInventory(item);
+                manageItem(item);
+            } catch (DocumentDoesNotExist e) {
+                MenuTitle.printErrorMessage(e.getMessage());
             } catch (IOException io) {
                 io.printStackTrace();
+            } catch (Exception e) {
+                MenuTitle.printErrorMessage("An unexpected error occured.");
+
+                e.printStackTrace();
             }
 
+        }
+
+    }
+
+    private void manageItem(Item item) throws IOException, DocumentDoesNotExist {
+
+        System.out.println("Item: " + item.getName());
+        System.out.println("[1] Edit");
+        System.out.println("[2] Delete");
+        System.out.println("[3] Return");
+
+        int choice = InputHelper.getChoiceInt(3);
+
+        if (choice == 1) {
+            editItemInventory(item);
+        } else if (choice == 2) {
+            deleteItem(item);
         }
 
     }
@@ -64,6 +88,11 @@ public class SellingItemList implements Screen {
         double price = InputHelper.getPositiveDouble("Price: ", "");
         item.setStock(quantity);
         item.setPrice(price);
+        System.out.println("Item successfully updated!!!\n");
+    }
+
+    private void deleteItem(Item item) throws IOException, DocumentDoesNotExist {
+        item.getDoc().delete();
         System.out.println("Item successfully updated!!!\n");
     }
 }

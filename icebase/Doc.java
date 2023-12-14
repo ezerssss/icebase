@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import icebase.icebase.exceptions.DocumentDoesNotExist;
 import icebase.icebase.interfaces.IData;
 
 public class Doc implements IData {
@@ -55,5 +56,13 @@ public class Doc implements IData {
         try (FileWriter fw = new FileWriter(this.documentPath)) {
             fw.write(data);
         }
+    }
+
+    public boolean delete() throws IOException, DocumentDoesNotExist {
+        if (!this.exists()) {
+            throw new DocumentDoesNotExist();
+        }
+
+        return this.path.toFile().delete();
     }
 }
