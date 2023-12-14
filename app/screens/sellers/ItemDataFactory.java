@@ -11,7 +11,11 @@ public class ItemDataFactory {
     public static String[] createNewItem(CATEGORY_ENUM category) {
         List<String> data = new ArrayList<>();
 
+<<<<<<< HEAD
         String name = InputHelper.getNonEmptyString("\nEnter item name: ", "\nItem name cannot be empty.");
+=======
+        String name = InputHelper.getNonEmptyString("Enter item name: ", "Item name cannot be empty.");
+>>>>>>> main
         data.add(name);
 
         double price = InputHelper.getPositiveDouble("\nEnter item price: ",
