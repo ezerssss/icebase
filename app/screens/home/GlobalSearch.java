@@ -46,7 +46,7 @@ public class GlobalSearch implements Screen {
                     System.out.printf("%d.   %-20s%-15.2f%-10d%-20s%n", ++count, name, price, stock, storeName);
                 }
 
-                input = InputHelper.getNonEmptyString("\nSearch again? [y/N] ", "");
+                input = InputHelper.getNonEmptyString("\nSearch again? [Y/N] ", "");
 
                 if (input.equalsIgnoreCase("n")) {
                     break;

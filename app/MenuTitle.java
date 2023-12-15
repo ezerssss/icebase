@@ -20,7 +20,7 @@ public class MenuTitle {
 
     public static final void displaySubTitle(String subTitle) {
         System.out.printf("\n\t%15s[%s]%15s\n\n",
-                " ", subTitle, " ");
+                " ", subTitle.toUpperCase(), " ");
     }
 
     public static final void displayPostItem(String subTitle) {
@@ -33,6 +33,7 @@ public class MenuTitle {
         int nameLength = storeName.length();
         int paddingLeft = (53 - nameLength) / 2;
         int paddingRight = 53 - nameLength - paddingLeft;
+        System.out.println("");
         displayBorder();
         System.out.printf(Colors.CYAN + "=%53s=\n" + Colors.RESET,
                 " ");
@@ -40,7 +41,7 @@ public class MenuTitle {
                 " ", storeName, " ");
         System.out.printf(Colors.CYAN + "=%53s=\n" + Colors.RESET,
                 " ");
-        MenuTitle.displayBorder();
+        displayBorder();
     }
 
     public static final void displayOptions(ArrayList<String> options) {

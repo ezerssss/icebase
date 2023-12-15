@@ -6,13 +6,13 @@ import java.time.LocalDate;
 import icebase.icebase.Doc;
 import icebase.app.enums.fields.ITEM_FIELD;
 
-public class Food extends Item {
+public class HouseholdItems extends Item {
     private int shelfLife;
     private LocalDate currenDate;
 
     private static final int SHELF_LIFE_INDEX = 7;
 
-    public Food(Doc doc) throws IOException {
+    public HouseholdItems(Doc doc) throws IOException {
         this.doc = doc;
 
         String[] data = doc.data().split(",");
@@ -32,7 +32,7 @@ public class Food extends Item {
         System.out.println(border);
         System.out.println("Price: " + price + "\nStock: " + stock);
         LocalDate expirationDate = currenDate.plusMonths(shelfLife);
-        System.out.println("Shelf life: " + shelfLife + "\nConsume before: " + expirationDate);
+        System.out.println("Shelf life: " + shelfLife + "\nUse by: " + expirationDate);
         System.out.println(border + "\n");
     }
 

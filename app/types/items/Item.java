@@ -3,6 +3,7 @@ package icebase.app.types.items;
 import java.io.IOException;
 
 import icebase.icebase.Doc;
+import icebase.app.Colors;
 
 public abstract class Item {
     protected String id;
@@ -13,6 +14,7 @@ public abstract class Item {
     protected int stock;
     protected String category;
     protected Doc doc;
+    protected String border = Colors.CYAN + "-------------------------------------------------------" + Colors.RESET;
 
     public abstract void displayDetails();
 

@@ -15,7 +15,7 @@ public class PostItem implements Screen {
 
     public PostItem() {
         for (CATEGORY_ENUM categoryENUM : CATEGORY_ENUM.values()) {
-            categoryNames.add(categoryENUM.value.toUpperCase());
+            categoryNames.add(categoryENUM.value);
         }
         categoryNames.add("Return");
     }
