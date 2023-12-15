@@ -12,9 +12,7 @@ Users can sell items to their own stores and can gain money when another
 account buys their items.
 
 ## Buying
-Users can browse different stores and buy the items listed in the store. A cart
-system will also be present allowing multiple items to be bought at once per
-store. When the user finishes a transaction, all necessary fields will be updated
+Users can browse different stores and buy the items listed in the store. When the user finishes a transaction, all necessary fields will be updated
 (stock of the item, money of buyer and seller, etc.).
 
 ## Database
