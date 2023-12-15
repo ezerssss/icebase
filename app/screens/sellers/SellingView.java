@@ -19,7 +19,6 @@ public class SellingView implements Screen {
     }
 
     public void display() {
-        MenuTitle.displayStoreName(storeName);
         ArrayList<String> options = new ArrayList<>();
         options.add("Post Item");
         options.add("Manage Items");
@@ -29,6 +28,7 @@ public class SellingView implements Screen {
         int choice;
 
         while (true) {
+            MenuTitle.displayStoreName(storeName);
             MenuTitle.displayOptions(options);
 
             choice = InputHelper.getChoiceInt(range);
