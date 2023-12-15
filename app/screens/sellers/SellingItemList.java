@@ -37,6 +37,7 @@ public class SellingItemList implements Screen {
     public void display() {
         Item item;
         int choice;
+        int itemIndex;
 
         while (true) {
             MenuTitle.displayStoreName(storeName);
@@ -53,7 +54,9 @@ public class SellingItemList implements Screen {
                 return;
             }
 
-            item = itemList.get(choice - 1);
+            itemIndex = choice - 1;
+
+            item = itemList.get(itemIndex);
 
             try {
                 System.out.println("Item: " + item.getName());
@@ -66,7 +69,7 @@ public class SellingItemList implements Screen {
                 if (choice == 1) {
                     editItemInventory(item);
                 } else if (choice == 2) {
-                    deleteItem(item);
+                    deleteItem(item, itemIndex);
                 } else if (choice == 3) {
                     break;
                 }
@@ -93,7 +96,10 @@ public class SellingItemList implements Screen {
         System.out.println("Item successfully updated!!!\n");
     }
 
-    private void deleteItem(Item item) throws IOException, DocumentDoesNotExist {
+    private void deleteItem(Item item, int itemIndex) throws IOException, DocumentDoesNotExist {
+        itemList.remove(itemIndex);
+        itemNames.remove(itemIndex);
+
         item.getDoc().delete();
         System.out.println("Item successfully updated!!!\n");
     }
