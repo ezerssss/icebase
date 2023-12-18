@@ -31,7 +31,9 @@ public class PostItem implements Screen {
         CATEGORY_ENUM category = CATEGORY_ENUM.values()[choice - 1];
 
         try {
+            MenuTitle.displaySubBorder();
             String[] itemData = ItemDataFactory.createNewItem(category);
+            MenuTitle.displaySubBorder();
 
             API.sell(itemData);
         } catch (UnauthorizedException e) {
@@ -43,5 +45,7 @@ public class PostItem implements Screen {
 
             e.printStackTrace();
         }
+
+        MenuTitle.printSuccessMessage("Item successfully added!");
     }
 }

@@ -3,9 +3,9 @@ package icebase.app.types.items;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import icebase.icebase.Doc;
 import icebase.app.MenuTitle;
 import icebase.app.enums.fields.ITEM_FIELD;
+import icebase.icebase.Doc;
 
 public class Electronics extends Item {
     private int warrantyPeriod;
@@ -30,7 +30,7 @@ public class Electronics extends Item {
     }
 
     public void displayDetails() {
-        System.out.println(border);
+        MenuTitle.displaySubBorder();
         System.out.println("Price: " + price + "\nStock: " + stock);
         LocalDate expirationDate = currenDate.plusMonths(warrantyPeriod);
         System.out.println("Warranty Period: " + warrantyPeriod + "\nCovered until: " + expirationDate);

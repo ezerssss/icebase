@@ -71,6 +71,7 @@ public class BuyingItemList implements Screen {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
     }
 
@@ -85,5 +86,6 @@ public class BuyingItemList implements Screen {
         int amount = InputHelper.getPositiveInt("Enter quantity: ",
                 "Quantity must be greater than 0. Please try again...\n");
         API.buy(item, amount); // error thrown are catch by the display method so user can choose another item
+        MenuTitle.printSuccessMessage("Item successfully purchased!");
     }
 }
