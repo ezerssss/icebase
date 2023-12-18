@@ -3,8 +3,17 @@ package icebase.app;
 import java.util.ArrayList;
 
 public class MenuTitle {
-    public static final void displayBorder() {
+    private static final int SCREEN_WIDTH = 55;
+    private static String str;
+    private static int strLength;
+    private static int paddingLeft;
+
+    public static final void displayMainBorder() {
         System.out.println(Colors.CYAN + "=======================================================" + Colors.RESET);
+    }
+
+    public static final void displaySubBorder() {
+        System.out.println(Colors.CYAN + "-------------------------------------------------------" + Colors.RESET);
     }
 
     public static final void displayMainTitle() {
@@ -15,57 +24,58 @@ public class MenuTitle {
                   | | | |     |  __|  |  _ <  / /\\ \\   \\___ \\ |  __|
                  _| |_| |____ | |____ | |_) |/ ____ \\  ____) || |____
                 |_____|\\_____||______||____//_/    \\_\\|_____/ |______|""" + Colors.RESET);
-        displayBorder();
+        displayMainBorder();
     }
 
-    public static final void displaySubTitle(String subTitle) {
-        System.out.printf("\n\t%15s[%s]%15s\n\n",
-                " ", subTitle.toUpperCase(), " ");
-    }
-
-    public static final void displayPostItem(String subTitle) {
-        System.out.printf("\n\t%12s[%s]%12s\n\n",
-                " ", subTitle, " ");
+    public static final void displaySubTitle(String title) {
+        str = title.toUpperCase();
+        strLength = str.length();
+        paddingLeft = (SCREEN_WIDTH - strLength) / 2;
+        System.out.printf("\n%" + paddingLeft + "s[%s]\n\n",
+                " ", str);
     }
 
     public static final void displayStoreName(String name) {
-        String storeName = name.toUpperCase();
-        int nameLength = storeName.length();
-        int paddingLeft = (53 - nameLength) / 2;
-        int paddingRight = 53 - nameLength - paddingLeft;
+        str = name.toUpperCase();
+        strLength = str.length();
+        paddingLeft = (SCREEN_WIDTH - strLength) / 2;
+        int paddingRight = SCREEN_WIDTH - strLength - paddingLeft;
+
         System.out.println("");
-        displayBorder();
-        System.out.printf(Colors.CYAN + "=%53s=\n" + Colors.RESET,
-                " ");
-        System.out.printf(Colors.CYAN + "=%" + paddingLeft + "s%s%" + paddingRight + "s=\n" + Colors.RESET,
-                " ", storeName, " ");
-        System.out.printf(Colors.CYAN + "=%53s=\n" + Colors.RESET,
-                " ");
-        displayBorder();
+        displayMainBorder();
+        System.out.printf(Colors.CYAN + "=%" + (SCREEN_WIDTH - 2) + "s=\n" + Colors.RESET, " ");
+        System.out.printf(Colors.CYAN + "=%" + (paddingLeft - 1) + "s%s%" + (paddingRight - 1) + "s=\n" + Colors.RESET,
+                " ", str, " ");
+        System.out.printf(Colors.CYAN + "=%" + (SCREEN_WIDTH - 2) + "s=\n" + Colors.RESET, " ");
+        displayMainBorder();
     }
 
     public static final void displayOptions(ArrayList<String> options) {
-        int size = options.size();
-        System.out.println("");
-        for (int i = 0; i < size; i++) {
-            System.out.printf(
-                    "\t%13s[%d] %s\n", " ", i + 1, options.get(i));
-        }
-        System.out.println("");
-    }
 
-    // re-allign store options in the middle
-    public static final void displayStoreOptions(ArrayList<String> options) {
+        int optionLength;
+        int maxOptionLength = options.get(0).length();
+        for (String option : options) {
+            optionLength = option.length();
+            if (maxOptionLength < optionLength) {
+                maxOptionLength = optionLength;
+            }
+        }
+
+        paddingLeft = (SCREEN_WIDTH - (maxOptionLength + 4)) / 2;
         int size = options.size();
         System.out.println("");
         for (int i = 0; i < size; i++) {
             System.out.printf(
-                    "\t%11s[%d] %s\n", " ", i + 1, options.get(i));
+                    "%" + (paddingLeft) + "s[%d] %s\n", " ", i + 1, options.get(i));
         }
         System.out.println("");
     }
 
     public static final void printErrorMessage(String errorMessage) {
         System.out.println(Colors.RED + errorMessage + Colors.RESET);
+    }
+
+    public static final void printSuccessMessage(String successMessage) {
+        System.out.println(Colors.CYAN + "\n" + successMessage + Colors.RESET);
     }
 }

@@ -3,8 +3,9 @@ package icebase.app.types.items;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import icebase.icebase.Doc;
+import icebase.app.MenuTitle;
 import icebase.app.enums.fields.ITEM_FIELD;
+import icebase.icebase.Doc;
 
 public class HouseholdItems extends Item {
     private int shelfLife;
@@ -29,7 +30,7 @@ public class HouseholdItems extends Item {
     }
 
     public void displayDetails() {
-        System.out.println(border);
+        MenuTitle.displaySubBorder();
         System.out.println("Price: " + price + "\nStock: " + stock);
         LocalDate expirationDate = currenDate.plusMonths(shelfLife);
         System.out.println("Shelf life: " + shelfLife + "\nUse by: " + expirationDate);

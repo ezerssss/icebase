@@ -61,7 +61,7 @@ public class InputHelper {
                     MenuTitle.printErrorMessage(errorMessage);
                 }
             } catch (NumberFormatException e) {
-                MenuTitle.printErrorMessage("Invalid input. Please enter a valid numeric value.");
+                MenuTitle.printErrorMessage("Invalid input. Please enter a valid numeric value.\n");
             }
         }
 
@@ -88,7 +88,7 @@ public class InputHelper {
                     MenuTitle.printErrorMessage(errorMessage);
                 }
             } catch (NumberFormatException e) {
-                MenuTitle.printErrorMessage("Invalid input. Please enter a valid numeric value.");
+                MenuTitle.printErrorMessage("Invalid input. Please enter a valid numeric value.\n");
             }
         }
 

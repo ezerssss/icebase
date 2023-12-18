@@ -45,8 +45,17 @@ public class ItemDataFactory {
                                 data.add(Integer.toString(warranty));
                                 break;
                         case CLOTHING:
-                                String size = InputHelper.getNonEmptyString("Enter size (S\\M\\L): ",
-                                                "\nSize cannot be none.\n");
+                                System.out.print("Enter size (1 - S\\2 - M\\3 - L): ");
+                                int sizeOption = InputHelper.getChoiceInt(3);
+                                String size;
+                                if (sizeOption == 1) {
+                                        size = "small";
+                                } else if (sizeOption == 2) {
+                                        size = "medium";
+                                } else {
+                                        size = "large";
+                                }
+
                                 String material = InputHelper.getNonEmptyString("Enter material: ",
                                                 "\nMaterial cannot be none.\n");
                                 String color = InputHelper.getNonEmptyString("Enter color: ",
@@ -57,8 +66,14 @@ public class ItemDataFactory {
                                 data.add(color);
                                 break;
                         case HARDWARE:
-                                String type = InputHelper.getNonEmptyString("Enter type (tool/accessory): ",
-                                                "\nType cannot be none.\n");
+                                System.out.print("Enter type (1 - tool/2 - accessory): ");
+                                sizeOption = InputHelper.getChoiceInt(2);
+                                String type;
+                                if (sizeOption == 1) {
+                                        type = "tool";
+                                } else {
+                                        type = "accessory";
+                                }
                                 data.add(type);
                                 break;
                         default:

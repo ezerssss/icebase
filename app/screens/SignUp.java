@@ -29,7 +29,7 @@ public class SignUp implements Screen {
 
                 Router.navigate(SCREEN_ENUM.SET_UP, user);
 
-                System.out.println(Colors.CYAN + "\nSign-up successful!" + Colors.RESET);
+                MenuTitle.printSuccessMessage("Sign-up successful!");
                 break;
 
             } catch (InvalidUsernameException e) {

@@ -38,6 +38,10 @@ public class SellingItemList implements Screen {
         Item item;
         int choice;
         int itemIndex;
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Edit");
+        options.add("Delete");
+        options.add("Return");
 
         while (true) {
             MenuTitle.displayStoreName(storeName);
@@ -59,10 +63,10 @@ public class SellingItemList implements Screen {
             item = itemList.get(itemIndex);
 
             try {
-                System.out.println("Item: " + item.getName());
-                System.out.println("[1] Edit");
-                System.out.println("[2] Delete");
-                System.out.println("[3] Return");
+                MenuTitle.displayMainBorder();
+                MenuTitle.displaySubTitle(item.getName());
+
+                MenuTitle.displayOptions(options);
 
                 choice = InputHelper.getChoiceInt(3);
 
@@ -88,12 +92,16 @@ public class SellingItemList implements Screen {
     }
 
     private void editItemInventory(Item item) throws IOException {
-        System.out.println("Item: " + item.getName());
-        int quantity = InputHelper.getPositiveInt("\nQuantity: ", "");
-        double price = InputHelper.getPositiveDouble("Price: ", "");
+        MenuTitle.displaySubBorder();
+        int quantity = InputHelper.getPositiveInt("Quantity: ",
+                "Quantity must be greater than 0. Please try again...\n");
+        double price = InputHelper.getPositiveDouble("Price: ", "Price must be greater than 0. Please try again...\\n" + //
+                "");
+        MenuTitle.displaySubBorder();
+
         item.setStock(quantity);
         item.setPrice(price);
-        System.out.println("Item successfully updated!!!\n");
+        MenuTitle.printSuccessMessage("Item successfully updated!");
     }
 
     private void deleteItem(Item item, int itemIndex) throws IOException, DocumentDoesNotExist {
@@ -101,6 +109,6 @@ public class SellingItemList implements Screen {
         itemNames.remove(itemIndex);
 
         item.getDoc().delete();
-        System.out.println("Item successfully updated!!!\n");
+        MenuTitle.printSuccessMessage("Item successfully deleted!");
     }
 }
