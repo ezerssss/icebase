@@ -26,16 +26,33 @@ public class BuyingItemList implements Screen {
     private Auth auth = Auth.getAuth();
     private User user = auth.getUser();
 
+    private void generateChoices() {
+        for (Item item : itemList) {
+            itemNames.add(item.getName());
+        }
+
+        itemNames.add("Return");
+    }
+
+    public BuyingItemList(Store store) {
+        this.storeName = store.getName();
+        this.categoryName = "All";
+        try {
+            this.itemList = API.getStoreItems(store);
+            this.generateChoices();
+        } catch (CategoryDoesNotExistException cdne) {
+            MenuTitle.printErrorMessage(cdne.getMessage());
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
+
     public BuyingItemList(Store store, CATEGORY_ENUM category) {
         this.storeName = store.getName();
         this.categoryName = category.value;
         try {
             this.itemList = API.getStoreItems(store, category);
-            for (Item item : itemList) {
-                itemNames.add(item.getName());
-            }
-            itemNames.add("Return");
-
+            this.generateChoices();
         } catch (CategoryDoesNotExistException cdne) {
             MenuTitle.printErrorMessage(cdne.getMessage());
         } catch (IOException io) {
