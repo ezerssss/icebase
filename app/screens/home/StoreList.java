@@ -14,32 +14,30 @@ import icebase.icebase.Auth;
 import icebase.icebase.User;
 
 public class StoreList implements Screen {
-    public void display() {
-        int choice;
+    private List<Store> stores = new ArrayList<>();
+    private ArrayList<String> storeNames = new ArrayList<>();
 
-        Store chosenStore;
-        String chosenStoreID;
-        User currentUser = Auth.getAuth().getUser();
-        String currentUserID = currentUser.getId();
-
-        List<Store> stores = new ArrayList<>();
-        ArrayList<String> storeNames = new ArrayList<>();
-
-        // Gets names of each stores for options list
+    // need ba ilagay sa constructor?
+    public StoreList() {
+        // Gets names of each store for options list
         try {
             stores = API.getStores();
-
             for (Store store : stores) {
                 storeNames.add(store.getName());
             }
             storeNames.add("Return");
-
         } catch (Exception e) {
             MenuTitle.printErrorMessage(e.getMessage());
-            return;
         }
+    }
 
+    public void display() {
+        int choice;
         int range = storeNames.size();
+        Store chosenStore;
+        String chosenStoreID;
+        User currentUser = Auth.getAuth().getUser();
+        String currentUserID = currentUser.getId();
 
         while (true) {
             MenuTitle.displayMainTitle();

@@ -32,7 +32,7 @@ public class ItemDataFactory {
                                 // As you can see the SHELF_LIFE_INDEX is the last data according to the enum
                                 // ITEM_FIELD found in Food.java, so it makes sense that it is the last data to
                                 // be added in the data list
-                                int shelfLife = InputHelper.getPositiveInt("Enter shelf life (in months): ",
+                                int shelfLife = InputHelper.getPositiveDouble("Enter shelf life (in months): ",
                                                 "\nShelf life cannot be 0 or negative.\n");
                                 data.add(Integer.toString(shelfLife));
 
@@ -40,7 +40,7 @@ public class ItemDataFactory {
                                 // list matters
                                 break;
                         case ELECTRONICS:
-                                int warranty = InputHelper.getPositiveInt("Enter warranty period (in months): ",
+                                int warranty = InputHelper.getPositiveDouble("Enter warranty period (in months): ",
                                                 "\nWarranty period cannot be 0 or negative.\n");
                                 data.add(Integer.toString(warranty));
                                 break;
