@@ -143,17 +143,16 @@ public class API {
             throw new BuyException("The item does not have enough stocks.");
         }
 
+        double totalPrice = item.getPrice() * amount;
+
         // Check if buyer has enough money
-        if (buyer.getMoney() < item.getPrice()) {
+        if (buyer.getMoney() < totalPrice) {
             throw new BuyException("You don't have enough money.");
         }
 
         // We can now be sure that the transaction is valid, so we can now make changes
         // to the db
         item.decreaseStock(amount);
-
-        double totalPrice = item.getPrice() * amount;
-
         buyer.decreaseMoney(totalPrice);
         seller.increaseMoney(totalPrice);
     }
