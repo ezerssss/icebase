@@ -31,7 +31,7 @@ public class Electronics extends Item {
 
     public void displayDetails() {
         MenuTitle.displaySubBorder();
-        System.out.println("Price: " + price + "\nStock: " + stock);
+        System.out.printf("Price: %.2f%nStock: %d%n", price, stock);
         LocalDate expirationDate = currenDate.plusMonths(warrantyPeriod);
         System.out.println("Warranty Period: " + warrantyPeriod + "\nCovered until: " + expirationDate);
         System.out.println(border + "\n");
