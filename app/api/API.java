@@ -122,9 +122,6 @@ public class API {
             throw new BuyException("Item not found.");
         }
 
-        Doc itemDoc = itemQuery.get(0);
-        item = ItemFactory.createItem(itemDoc);
-
         // Find the seller of the item
         QueryList sellerQuery = db.collection(COLLECTION_ENUM.USERS.value).where(item.getSellerId(),
                 USER_FIELD.USER_ID.index);
