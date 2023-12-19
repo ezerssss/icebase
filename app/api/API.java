@@ -151,8 +151,11 @@ public class API {
         // We can now be sure that the transaction is valid, so we can now make changes
         // to the db
         item.decreaseStock(amount);
-        buyer.decreaseMoney(item.getPrice());
-        seller.increaseMoney(item.getPrice());
+
+        double totalPrice = item.getPrice() * amount;
+
+        buyer.decreaseMoney(totalPrice);
+        seller.increaseMoney(totalPrice);
     }
 
     public static void sell(String... data) throws UnauthorizedException, IOException {
