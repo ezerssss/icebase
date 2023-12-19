@@ -51,6 +51,10 @@ public class Auth {
         return user;
     }
 
+    public void logout() {
+        this.currentUser = null;
+    }
+
     public User signUp(String username, String password) throws InvalidUsernameException, IOException {
         // Check if username already exists
         QueryList docs = USERS_COLLECTION.where(username, USER_FIELD.USERNAME.index);
