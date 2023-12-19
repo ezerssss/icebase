@@ -81,7 +81,7 @@ public class BuyingItemList implements Screen {
         MenuTitle.displayStoreName(storeName);
         MenuTitle.displaySubTitle(itemName);
         item.displayDetails();
-        System.out.println("Current money: " + user.getMoney());
+        System.out.printf("Current money: %.2f%n", user.getMoney());
 
         int amount = InputHelper.getPositiveInt("Enter quantity: ",
                 "Quantity must be greater than 0. Please try again...\n");
