@@ -65,7 +65,7 @@ public class SellingItemList implements Screen {
             try {
                 MenuTitle.displayMainBorder();
                 MenuTitle.displaySubTitle(item.getName());
-
+                item.displayDetails();
                 MenuTitle.displayOptions(options);
 
                 choice = InputHelper.getChoiceInt(3);
