@@ -34,7 +34,7 @@ public class Router {
                 (new PostItem()).display();
                 break;
             default:
-                break;
+                System.out.println("INVALID ROUTE");
         }
     }
 
@@ -42,8 +42,10 @@ public class Router {
         switch (screen) {
             case SET_UP:
                 (new Setup(user)).display();
-            default:
                 break;
+            default:
+                System.out.println("INVALID ROUTE");
+
         }
     }
 
@@ -53,6 +55,9 @@ public class Router {
             case BUYING_VIEW:
                 (new BuyingView(store)).display();
                 break;
+            case BUYING_ITEM_LIST:
+                (new BuyingItemList(store)).display();
+                break;
             case SELLING_ITEM_LIST:
                 (new SellingItemList(store)).display();
                 break;
@@ -60,7 +65,7 @@ public class Router {
                 (new SellingView(store)).display();
                 break;
             default:
-                break;
+                System.out.println("INVALID ROUTE");
         }
     }
 
@@ -69,6 +74,8 @@ public class Router {
             case BUYING_ITEM_LIST:
                 (new BuyingItemList(store, category)).display();
                 break;
+            default:
+                System.out.println("INVALID ROUTE");
         }
     }
 }
