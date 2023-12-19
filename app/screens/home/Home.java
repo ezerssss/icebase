@@ -6,8 +6,11 @@ import icebase.app.*;
 import icebase.app.enums.SCREEN_ENUM;
 import icebase.app.helpers.InputHelper;
 import icebase.app.screens.Screen;
+import icebase.icebase.Auth;
 
 public class Home implements Screen {
+    private static final Auth auth = Auth.getAuth();
+
     public void display() {
         int choice;
         ArrayList<String> options = new ArrayList<>();
@@ -25,6 +28,8 @@ public class Home implements Screen {
             } else if (choice == 2) {
                 Router.navigate(SCREEN_ENUM.GLOBAL_SEARCH);
             } else {
+                auth.logout();
+
                 return;
             }
         }

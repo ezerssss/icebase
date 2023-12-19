@@ -21,6 +21,7 @@ public class BuyingView implements Screen {
         for (CATEGORY_ENUM categoryENUM : CATEGORY_ENUM.values()) {
             categoryNames.add(categoryENUM.value);
         }
+        categoryNames.add("All");
         categoryNames.add("Return");
     }
 
@@ -36,8 +37,15 @@ public class BuyingView implements Screen {
             if (choice == categoryNames.size()) {
                 return;
             }
-            category = CATEGORY_ENUM.values()[choice - 1];
-            Router.navigate(SCREEN_ENUM.BUYING_ITEM_LIST, store, category);
+
+            // If user selects "All"
+            if (choice == categoryNames.size() - 1) {
+                Router.navigate(SCREEN_ENUM.BUYING_ITEM_LIST, store);
+            } else {
+                category = CATEGORY_ENUM.values()[choice - 1];
+                Router.navigate(SCREEN_ENUM.BUYING_ITEM_LIST, store, category);
+            }
+
         }
     }
 }

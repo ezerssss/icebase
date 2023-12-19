@@ -1,7 +1,6 @@
 package icebase.app.types.items;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import icebase.app.MenuTitle;
 import icebase.app.enums.fields.ITEM_FIELD;
@@ -29,7 +28,7 @@ public class Hardware extends Item {
 
     public void displayDetails() {
         MenuTitle.displaySubBorder();
-        System.out.println("Price: " + price + "\nStock: " + stock);
+        System.out.printf("Price: %.2f%nStock: %d%n", price, stock);
         System.out.println("Type: " + type);
         System.out.println(border + "\n");
 

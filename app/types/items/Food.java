@@ -31,7 +31,7 @@ public class Food extends Item {
 
     public void displayDetails() {
         MenuTitle.displaySubBorder();
-        System.out.println("Price: " + price + "\nStock: " + stock);
+        System.out.printf("Price: %.2f%nStock: %d%n", price, stock);
         LocalDate expirationDate = currenDate.plusMonths(shelfLife);
         System.out.println("Shelf life: " + shelfLife + "\nConsume before: " + expirationDate);
         System.out.println(border + "\n");

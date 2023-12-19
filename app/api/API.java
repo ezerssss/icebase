@@ -122,9 +122,6 @@ public class API {
             throw new BuyException("Item not found.");
         }
 
-        Doc itemDoc = itemQuery.get(0);
-        item = ItemFactory.createItem(itemDoc);
-
         // Find the seller of the item
         QueryList sellerQuery = db.collection(COLLECTION_ENUM.USERS.value).where(item.getSellerId(),
                 USER_FIELD.USER_ID.index);
@@ -154,8 +151,11 @@ public class API {
         // We can now be sure that the transaction is valid, so we can now make changes
         // to the db
         item.decreaseStock(amount);
-        buyer.decreaseMoney(item.getPrice());
-        seller.increaseMoney(item.getPrice());
+
+        double totalPrice = item.getPrice() * amount;
+
+        buyer.decreaseMoney(totalPrice);
+        seller.increaseMoney(totalPrice);
     }
 
     public static void sell(String... data) throws UnauthorizedException, IOException {

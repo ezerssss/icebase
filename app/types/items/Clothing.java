@@ -35,7 +35,7 @@ public class Clothing extends Item {
 
     public void displayDetails() {
         MenuTitle.displaySubBorder();
-        System.out.println("Price: " + price + "\nStock: " + stock);
+        System.out.printf("Price: %.2f%nStock: %d%n", price, stock);
         System.out.println("Size: " + size);
         System.out.println("Material: " + material);
         System.out.println("Color: " + color);
