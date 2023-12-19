@@ -1,7 +1,9 @@
 package icebase.app.screens.home;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
@@ -17,13 +19,23 @@ public class StoreList implements Screen {
     private List<Store> stores = new ArrayList<>();
     private ArrayList<String> storeNames = new ArrayList<>();
 
-    // need ba ilagay sa constructor?
     public StoreList() {
         // Gets names of each store for options list
+        Set<String> uniqueStoreNames = new HashSet<>();
+        String name;
+        String storeIdentifier;
+        boolean hasDuplicate;
         try {
             stores = API.getStores();
             for (Store store : stores) {
-                storeNames.add(store.getName());
+                name = store.getName();
+                hasDuplicate = !(uniqueStoreNames.add(name));
+                if (hasDuplicate) {
+                    storeIdentifier = " - " + store.getSellerId().substring(0, 3);
+                    storeNames.add(name + storeIdentifier);
+                } else {
+                    storeNames.add(name);
+                }
             }
             storeNames.add("Return");
         } catch (Exception e) {
