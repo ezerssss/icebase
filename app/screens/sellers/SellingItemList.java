@@ -2,7 +2,9 @@ package icebase.app.screens.sellers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import icebase.app.MenuTitle;
 import icebase.app.api.API;
@@ -21,12 +23,24 @@ public class SellingItemList implements Screen {
 
     public SellingItemList(Store store) {
         this.storeName = store.getName();
+        Set<String> uniqueItemNames = new HashSet<>();
+        String name;
+        String itemIdentifier;
+        boolean hasDuplicate;
         try {
             this.itemList = API.getStoreItems(store);
             for (Item item : itemList) {
-                itemNames.add(item.getName());
+                name = item.getName();
+                hasDuplicate = !(uniqueItemNames.add(name));
+                if (hasDuplicate) {
+                    itemIdentifier = " - " + item.getId().substring(0, 3);
+                    itemNames.add(name + itemIdentifier);
+                } else {
+                    itemNames.add(name);
+                }
             }
             itemNames.add("Return");
+
         } catch (CategoryDoesNotExistException cdne) {
             MenuTitle.printErrorMessage(cdne.getMessage());
         } catch (IOException io) {
