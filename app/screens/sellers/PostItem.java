@@ -42,7 +42,6 @@ public class PostItem implements Screen {
             e.printStackTrace();
         } catch (Exception e) {
             MenuTitle.printErrorMessage("An unexpected error occurred.");
-
             e.printStackTrace();
         }
 

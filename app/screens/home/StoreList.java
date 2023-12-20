@@ -1,7 +1,9 @@
 package icebase.app.screens.home;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import icebase.app.api.API;
 import icebase.app.enums.SCREEN_ENUM;
@@ -14,32 +16,40 @@ import icebase.icebase.Auth;
 import icebase.icebase.User;
 
 public class StoreList implements Screen {
+    private List<Store> stores = new ArrayList<>();
+    private ArrayList<String> storeNames = new ArrayList<>();
+
+    public StoreList() {
+        // Gets names of each store for options list
+        Set<String> uniqueStoreNames = new HashSet<>();
+        String name;
+        String storeIdentifier;
+        boolean hasDuplicate;
+        try {
+            stores = API.getStores();
+            for (Store store : stores) {
+                name = store.getName();
+                hasDuplicate = !(uniqueStoreNames.add(name));
+                if (hasDuplicate) {
+                    storeIdentifier = " - " + store.getSellerId().substring(0, 3);
+                    storeNames.add(name + storeIdentifier);
+                } else {
+                    storeNames.add(name);
+                }
+            }
+            storeNames.add("Return");
+        } catch (Exception e) {
+            MenuTitle.printErrorMessage(e.getMessage());
+        }
+    }
+
     public void display() {
         int choice;
-
+        int range = storeNames.size();
         Store chosenStore;
         String chosenStoreID;
         User currentUser = Auth.getAuth().getUser();
         String currentUserID = currentUser.getId();
-
-        List<Store> stores = new ArrayList<>();
-        ArrayList<String> storeNames = new ArrayList<>();
-
-        // Gets names of each stores for options list
-        try {
-            stores = API.getStores();
-
-            for (Store store : stores) {
-                storeNames.add(store.getName());
-            }
-            storeNames.add("Return");
-
-        } catch (Exception e) {
-            MenuTitle.printErrorMessage(e.getMessage());
-            return;
-        }
-
-        int range = storeNames.size();
 
         while (true) {
             MenuTitle.displayMainTitle();

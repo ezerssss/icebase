@@ -18,13 +18,11 @@ public class Home implements Screen {
         options.add("Item Search");
         options.add("Log-out");
 
-        int range = options.size();
-
         while (true) {
             MenuTitle.displayMainTitle();
             MenuTitle.displayOptions(options);
 
-            choice = InputHelper.getChoiceInt(range);
+            choice = InputHelper.getChoiceInt(options.size());
             if (choice == 1) {
                 Router.navigate(SCREEN_ENUM.STORE_LIST);
             } else if (choice == 2) {
